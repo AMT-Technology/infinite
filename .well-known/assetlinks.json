@@ -1,0 +1,28 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.appsmarttechnology.verdadoreto",
+      "sha256_cert_fingerprints": [
+        "71:D6:6A:6F:57:07:08:F7:51:2E:4E:4C:1C:E2:A8:EE:37:B2:F2:80:02:F9:CE:7B:F7:08:44:02:F1:2F:D6:EA"
+      ]
+    }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.appsmarttechnology.bibliauniversal",
+      "sha256_cert_fingerprints": [
+        "7F:08:49:74:CF:AD:73:E9:DB:50:D5:D7:C6:B8:79:F8:8A:B9:E3:09:7E:1B:99:5F:B6:14:39:3B:C7:70:4F:CC"
+      ]
+    }
+  }
+]

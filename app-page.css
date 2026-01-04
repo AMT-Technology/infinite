@@ -29,7 +29,8 @@
 }
 
 .app-detail-container {
-  background: white;
+  background: #020617;
+  border: 1px solid rgba(31,41,55,0.9);
   border-radius: 16px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   padding: 30px;

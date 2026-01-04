@@ -94,7 +94,7 @@ body {
 
 .categories-bar {
   position: sticky;
-  top: 72px; /* debajo del header */
+  top: 120px; /* debajo del header */
   z-index: 15;
 }
 

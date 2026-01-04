@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Appser Store — Detalles de App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="app-page.css">
+  
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="store-header">
+    <div class="brand">
+      <img src="logo.webp" alt="Appser" class="brand-logo" onclick="window.location.href='index.html'">
+      <div>
+        <h1>Appser Store</h1>
+        <p class="brand-tagline">Apps para todos</p>
+      </div>
+    </div>
+    
+    <div class="header-right">
+      <button class="btn-back" onclick="window.location.href='index.html'">← Volver al inicio</button>
+    </div>
+  </header>
+
+  <!-- CONTENIDO DE LA APP -->
+  <main class="app-detail-page">
+    <div id="appContainer" class="app-detail-container">
+      <div class="loading-container">
+        <p>Cargando información de la app...</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="store-footer">
+    <div>
+      © <span id="year"></span> Appser Store — Apps para todos ·
+      <a href="/privacidad.html">Privacidad</a> ·
+      <a href="/terminos.html">Términos</a>
+    </div>
+  </footer>
+
+  <script src="firebase.js"></script>
+  <script src="app-detail.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

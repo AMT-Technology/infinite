@@ -16,7 +16,7 @@ async function cargarApp() {
   const appId = getAppIdFromURL();
   
   if (!appId) {
-    window.location.href = 'https://appsem.rap-infinite.online/';
+    window.location.href = 'index.html';
     return;
   }
   

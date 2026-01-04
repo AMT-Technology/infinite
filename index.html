@@ -27,7 +27,6 @@
   <meta property="og:url" content="https://appsem.rap-infinite.online/">
   <meta property="og:image" content="https://appsem.rap-infinite.online/logo.webp">
 
-
   <!-- 🐦 Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Appser Store — Apps para todos">
@@ -64,7 +63,6 @@
   <!-- Estilos -->
   <link rel="stylesheet" href="styles.css">
 </head>
-
 
 <body>  
   <!-- HEADER -->
@@ -113,237 +111,14 @@
     </section>
   </main>
   
- 
-<!-- grafico_1 -->
-  
- <footer class="store-footer">
-  <div>
-    © <span id="year"></span> Appser Store — Apps para todos ·
-    <a href="/privacidad.html">Privacidad</a> ·
-    <a href="/terminos.html">Términos</a>
-  </div>
-</footer>
-
-  <!-- ========== OVERLAY DETALLE ========== -->
-  <div id="detailOverlay" class="overlay hidden">
-    <div id="detailBackdrop" class="overlay-backdrop"></div>
-
-    <div class="overlay-panel">
-
-      <button id="detailClose" class="overlay-close">✕</button>
-
-      <div class="overlay-header">
-        <img id="detailIcon" class="overlay-icon" src="" alt="App">
-        <div>
-          <h1 id="detailName"></h1>
-          <p id="detailCategory"></p>
-          <p id="detailSize"></p>
-          <p id="detailInternet"></p>
-        </div>
-      </div>
-
-      <div class="install-share-row">
-
-        <button id="installBtn" class="install-btn">
-          <img src="assets/icons/descargar.png" alt="Descarga Directa">
-        </button>
-
-        <button id="playstoreBtn" class="playstore-btn">
-          <img src="assets/icons/playstore.png" alt="Play Store">
-        </button>
-
-        <button id="uptodownBtn" class="uptodown-btn">
-          <img src="assets/icons/uptodown.png" alt="Uptodown">
-        </button>
-
-        <button id="megaBtn" class="mega-btn">
-          <img src="assets/icons/mega.png" alt="Mega">
-        </button>
-
-        <button id="mediafireBtn" class="mediafire-btn">
-          <img src="assets/icons/mediafire.png" alt="Mediafire">
-        </button>
-
-        <button id="shareBtn" class="share-btn">
-          <img src="assets/icons/compartir.png" alt="Compartir">
-        </button>
-      </div>
-
-      <p id="detailStats" class="detail-stats"></p>
-
-      <!-- Bloque estrellas + like (ACTUALIZADO) -->
-      <div class="rating-block">
-        <p id="ratingLabel" class="rating-label"></p>
-
-        <!-- Estrellas para votar -->
-        <div id="starsRow" class="stars-row"></div>
-
-        <button id="likeBtn" class="like-btn">❤️ Me gusta</button>
-      </div>
-
-      <!-- Resumen valoraciones tipo Google Play -->
-      <h2>Valoraciones y reseñas</h2>
-      <div class="stars-graph">
-        <div class="stars-left">
-          <div id="ratingBig" class="rating-big">0.0</div>
-          <div id="ratingTotal" class="rating-total">0 reseñas</div>
-        </div>
-
-        <div class="stars-bars">
-          <div class="bar-row">
-            <span>5</span>
-            <div class="bar"><div id="bar5" class="bar-fill"></div></div>
-          </div>
-          <div class="bar-row">
-            <span>4</span>
-            <div class="bar"><div id="bar4" class="bar-fill"></div></div>
-          </div>
-          <div class="bar-row">
-            <span>3</span>
-            <div class="bar"><div id="bar3" class="bar-fill"></div></div>
-          </div>
-          <div class="bar-row">
-            <span>2</span>
-            <div class="bar"><div id="bar2" class="bar-fill"></div></div>
-          </div>
-          <div class="bar-row">
-            <span>1</span>
-            <div class="bar"><div id="bar1" class="bar-fill"></div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- INFORMACIÓN DE LA APP -->
-      <h2>Información de la app</h2>
-
-      <div class="info-grid">
-
-        <div class="info-box">
-          <span class="info-icon">🌐</span>
-          <div>
-            <p class="info-title">Idioma</p>
-            <p id="infoIdioma" class="info-value">—</p>
-          </div>
-        </div>
-
-        <div class="info-box">
-          <span class="info-icon">🔢</span>
-          <div>
-            <p class="info-title">Versión</p>
-            <p id="infoVersion" class="info-value">—</p>
-          </div>
-        </div>
-
-        <div class="info-box">
-          <span class="info-icon">🏷️</span>
-          <div>
-            <p class="info-title">Licencia</p> <!-- antes: Tipo -->
-            <p id="infoTipo" class="info-value">—</p>
-          </div>
-        </div>
-
-        <div class="info-box">
-          <span class="info-icon">📱</span>
-          <div>
-            <p class="info-title">Sistema operativo</p>
-            <p id="infoSO" class="info-value">—</p>
-          </div>
-        </div>
-
-        <div class="info-box">
-          <span class="info-icon">⚙️</span>
-          <div>
-            <p class="info-title">Requisitos del sistema</p>
-            <p id="infoReq" class="info-value">—</p>
-          </div>
-        </div>
-
-        <div class="info-box">
-          <span class="info-icon">📅</span>
-          <div>
-            <p class="info-title">Actualización</p>
-            <p id="infoFechaAct" class="info-value">—</p>
-          </div>
-        </div>
-
-        <div class="info-box">
-          <span class="info-icon">🔞</span>
-          <div>
-            <p class="info-title">Edad recomendada</p>
-            <p id="infoEdad" class="info-value">—</p>
-          </div>
-        </div>
-
-        <div class="info-box">
-          <span class="info-icon">📢</span>
-          <div>
-            <p class="info-title">Anuncios</p>
-            <p id="infoAnuncios" class="info-value">—</p>
-          </div>
-        </div>
-
-        <div class="info-box">
-          <span class="info-icon">🔗</span>
-          <div>
-            <p class="info-title">Política de privacidad</p>
-            <p class="info-value">
-              <a id="infoPrivacidad" href="#" target="_blank">No disponible</a>
-            </p>
-          </div>
-        </div>
-
-        <div class="info-box">
-          <span class="info-icon">📦</span>
-          <div>
-            <p class="info-title">Tamaño del APK</p>
-            <p id="infoTamañoApk" class="info-value">—</p>
-          </div>
-        </div>
-
-        <div class="info-box">
-          <span class="info-icon">🆔</span>
-          <div>
-            <p class="info-title">Package Name</p>
-            <p id="infoPackageName" class="info-value">—</p>
-          </div>
-        </div>
-
-        <div class="info-box">
-          <span class="info-icon">⬇️</span>
-          <div>
-            <p class="info-title">Descargas</p> <!-- antes: N.º descargas reales -->
-            <p id="infoDescargas" class="info-value">0</p>
-          </div>
-        </div>
-
-      </div>
-
-      <h2>Descripción</h2>
-      <p id="detailDesc" class="detail-desc"></p>
-
-      <h2>Capturas de pantalla</h2>
-      <div id="detailScreens" class="screenshots-row"></div>
-
-      <h2>Reseñas de usuarios</h2>
-
-      <!-- Formulario reseña -->
-      <div class="review-form">
-        <h3>Escribe una reseña</h3>
-        <label>Tu puntuación:</label>
-        <div id="reviewStars" class="stars-row"></div>
-        <textarea id="reviewText" placeholder="Escribe tu comentario..." maxlength="280"></textarea>
-        <button id="sendReviewBtn" class="install-btn" style="margin-top:10px;">
-          Enviar reseña
-        </button>
-      </div>
-
-      <!-- Lista reseñas -->
-      <div id="reviewsList" class="reviews-list"></div>
-
+  <footer class="store-footer">
+    <div>
+      © <span id="year"></span> Appser Store — Apps para todos ·
+      <a href="/privacidad.html">Privacidad</a> ·
+      <a href="/terminos.html">Términos</a>
     </div>
-  </div>
+  </footer>
 
- 
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
@@ -355,6 +130,5 @@
 
   <!-- Lógica -->
   <script src="index.js"></script>
-
 </body>
 </html>

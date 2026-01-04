@@ -1,0 +1,460 @@
+/* app-page.css - Estilos para páginas individuales de apps */
+
+/* Botón volver */
+.btn-back {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-back:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+/* Contenedor principal de la página de app */
+.app-detail-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: calc(100vh - 200px);
+}
+
+.app-detail-container {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+/* Header de la app */
+.overlay-header {
+  display: flex;
+  gap: 25px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.overlay-icon {
+  width: 120px;
+  height: 120px;
+  border-radius: 20px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.overlay-header div {
+  flex: 1;
+  min-width: 300px;
+}
+
+.overlay-header h1 {
+  font-size: 2rem;
+  margin: 0 0 10px 0;
+  color: #1e293b;
+}
+
+.overlay-header p {
+  margin: 5px 0;
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+/* Botones de acción */
+.install-share-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 25px 0;
+  padding: 20px;
+  background: #f8fafc;
+  border-radius: 12px;
+}
+
+.install-btn, .playstore-btn, .uptodown-btn, 
+.mega-btn, .mediafire-btn, .share-btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+  height: 60px;
+}
+
+.install-btn {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+}
+
+.install-btn:hover {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  transform: translateY(-2px);
+}
+
+.playstore-btn {
+  background: #34d399;
+  color: white;
+}
+
+.uptodown-btn {
+  background: #8b5cf6;
+  color: white;
+}
+
+.mega-btn {
+  background: #f97316;
+  color: white;
+}
+
+.mediafire-btn {
+  background: #0ea5e9;
+  color: white;
+}
+
+.share-btn {
+  background: #64748b;
+  color: white;
+}
+
+.install-btn img, .playstore-btn img, .uptodown-btn img,
+.mega-btn img, .mediafire-btn img, .share-btn img {
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) invert(1);
+}
+
+/* Stats */
+.detail-stats {
+  background: #e0f2fe;
+  padding: 15px 20px;
+  border-radius: 10px;
+  color: #0369a1;
+  font-weight: 500;
+  margin: 20px 0;
+  border-left: 4px solid #0ea5e9;
+}
+
+/* Rating */
+.rating-block {
+  background: #fff7ed;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 25px 0;
+  border: 1px solid #fed7aa;
+}
+
+.rating-label {
+  font-size: 1.1rem;
+  color: #ea580c;
+  margin: 0 0 15px 0;
+  font-weight: 600;
+}
+
+.stars-row {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 15px;
+}
+
+.star-static {
+  font-size: 24px;
+  color: #fbbf24;
+  cursor: default;
+}
+
+.like-btn {
+  background: #fecaca;
+  color: #dc2626;
+  border: 1px solid #fca5a5;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.like-btn:hover:not(:disabled) {
+  background: #fca5a5;
+}
+
+.like-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Info Grid */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin: 25px 0;
+}
+
+.info-box {
+  background: #f8fafc;
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border: 1px solid #e2e8f0;
+  transition: transform 0.2s;
+}
+
+.info-box:hover {
+  transform: translateY(-3px);
+  border-color: #cbd5e1;
+}
+
+.info-icon {
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.info-title {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin: 0 0 5px 0;
+}
+
+.info-value {
+  font-size: 1rem;
+  color: #1e293b;
+  margin: 0;
+  font-weight: 500;
+}
+
+.info-value a {
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+.info-value a:hover {
+  text-decoration: underline;
+}
+
+/* Descripción */
+.detail-desc {
+  line-height: 1.6;
+  color: #334155;
+  font-size: 1rem;
+  margin: 20px 0;
+  padding: 20px;
+  background: #f1f5f9;
+  border-radius: 10px;
+  white-space: pre-line;
+}
+
+/* Screenshots */
+.screenshots-row {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding: 15px 0;
+  margin: 20px 0;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+.screenshots-row::-webkit-scrollbar {
+  height: 6px;
+}
+
+.screenshots-row::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.screenshots-row img {
+  height: 300px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+/* Formulario reseñas */
+.review-form {
+  background: #f8fafc;
+  padding: 25px;
+  border-radius: 12px;
+  margin: 30px 0;
+  border: 1px solid #e2e8f0;
+}
+
+.review-form h3 {
+  margin: 0 0 15px 0;
+  color: #1e293b;
+}
+
+.review-form label {
+  display: block;
+  margin: 15px 0 8px 0;
+  color: #475569;
+  font-weight: 500;
+}
+
+.review-form textarea {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 100px;
+  margin-bottom: 15px;
+}
+
+.review-form textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Lista reseñas */
+.reviews-list {
+  margin: 30px 0;
+}
+
+.review-item {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #e2e8f0;
+}
+
+.review-stars {
+  color: #fbbf24;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.review-text {
+  color: #334155;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.review-time {
+  color: #94a3b8;
+  font-size: 0.85rem;
+}
+
+/* Loading */
+.loading-container {
+  text-align: center;
+  padding: 50px;
+  color: #64748b;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .app-detail-container {
+    padding: 20px;
+  }
+  
+  .overlay-header {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+  
+  .overlay-icon {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .install-share-row {
+    justify-content: center;
+  }
+  
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .screenshots-row img {
+    height: 200px;
+  }
+}
+
+/* Estrellas para gráfico de valoraciones */
+.stars-graph {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  margin: 20px 0;
+  padding: 20px;
+  background: #f8fafc;
+  border-radius: 12px;
+}
+
+.stars-left {
+  text-align: center;
+  min-width: 100px;
+}
+
+.rating-big {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #1e293b;
+}
+
+.rating-total {
+  color: #64748b;
+  margin-top: 5px;
+}
+
+.stars-bars {
+  flex: 1;
+}
+
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0;
+}
+
+.bar-row span {
+  width: 20px;
+  text-align: right;
+  color: #64748b;
+}
+
+.bar {
+  flex: 1;
+  height: 10px;
+  background: #e2e8f0;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  background: #fbbf24;
+  border-radius: 5px;
+}

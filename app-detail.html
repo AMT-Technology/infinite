@@ -198,30 +198,16 @@
     </div>
   </footer>
 
-  <!-- Firebase -->
+  <!-- INCLUYE LOS ARCHIVOS DE FIREBASE IGUAL QUE EN index.html -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  
+  <!-- INCLUYE TU ARCHIVO firebase.js -->
+  <script src="firebase.js"></script>
   
   <script>
-    // Configuración de Firebase (usa la misma que en index.html)
-    // Asegúrate de que esta configuración sea IDÉNTICA a la de firebase.js
-    const firebaseConfig = {
-      apiKey: "TU_API_KEY",
-      authDomain: "TU_AUTH_DOMAIN",
-      projectId: "TU_PROJECT_ID",
-      storageBucket: "TU_STORAGE_BUCKET",
-      messagingSenderId: "TU_MESSAGING_SENDER_ID",
-      appId: "TU_APP_ID"
-    };
-    
-    // Inicializar Firebase
-    if (!firebase.apps.length) {
-      firebase.initializeApp(firebaseConfig);
-    }
-    
-    // Obtener referencia a Firestore
-    const db = firebase.firestore();
-    
     document.getElementById('year').textContent = new Date().getFullYear();
     
     // Obtener ID de la URL
@@ -241,6 +227,12 @@
       
       try {
         console.log("Buscando app con ID:", appId);
+        
+        // db debería estar disponible desde firebase.js
+        if (typeof db === 'undefined') {
+          throw new Error("Firebase no está inicializado");
+        }
+        
         const doc = await db.collection("apps").doc(appId).get();
         
         if (!doc.exists) {
@@ -304,6 +296,14 @@
         html += `<button class="btn-secondary" onclick="window.open('${app.mediafireUrl}', '_blank')">MediaFire</button>`;
       }
       
+      if (app.uptodownUrl) {
+        html += `<button class="btn-secondary" onclick="window.open('${app.uptodownUrl}', '_blank')">Uptodown</button>`;
+      }
+      
+      if (app.megaUrl) {
+        html += `<button class="btn-secondary" onclick="window.open('${app.megaUrl}', '_blank')">MEGA</button>`;
+      }
+      
       html += `</div>`;
       
       // Información adicional
@@ -329,14 +329,33 @@
         `;
       }
       
+      if (app.idioma) {
+        html += `
+          <div class="info-card">
+            <h3>Idioma</h3>
+            <p>${app.idioma}</p>
+          </div>
+        `;
+      }
+      
+      if (app.sistemaOperativo) {
+        html += `
+          <div class="info-card">
+            <h3>Sistema operativo</h3>
+            <p>${app.sistemaOperativo}</p>
+          </div>
+        `;
+      }
+      
       html += `
           <div class="info-card">
             <h3>Información adicional</h3>
-            <p><strong>Idioma:</strong> ${app.idioma || 'No especificado'}</p>
             <p><strong>Licencia:</strong> ${app.tipo || 'Gratis'}</p>
             <p><strong>Anuncios:</strong> ${app.anuncios === 'si' ? 'Sí contiene' : app.anuncios === 'no' ? 'No contiene' : 'No especificado'}</p>
             <p><strong>Edad recomendada:</strong> ${app.edad || 'No especificada'}</p>
             <p><strong>Actualización:</strong> ${app.fechaActualizacion ? new Date(app.fechaActualizacion).toLocaleDateString('es-ES') : 'No especificada'}</p>
+            <p><strong>Package Name:</strong> ${app.packageName || 'No especificado'}</p>
+            ${app.privacidadUrl ? `<p><strong>Política de privacidad:</strong> <a href="${app.privacidadUrl}" target="_blank">Ver aquí</a></p>` : ''}
           </div>
         </div>
       `;

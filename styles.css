@@ -20,7 +20,7 @@ body {
   backdrop-filter: blur(12px);
   background: linear-gradient(to right, rgba(15,23,42,0.96), rgba(15,23,42,0.92));
   border-bottom: 1px solid rgba(148, 163, 184, 0.3);
-  padding: 10px 18px;
+  padding: 16px 18px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -229,6 +229,13 @@ body {
   .apps-grid {
     grid-template-columns: repeat(2, minmax(150px, 1fr));
     max-height: none;
+  }
+
+  .store-header {
+    min-height: 160px;
+  }
+  .categories-bar {
+    top: 160px;
   }
 }
 

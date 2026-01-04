@@ -1,16 +1,137 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <title>Appser Store — Detalles de App</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalles de la App - Appser Store</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="app-page.css">
-  
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <style>
+    .app-detail-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+    
+    .app-header {
+      display: flex;
+      gap: 30px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    
+    .app-icon {
+      width: 120px;
+      height: 120px;
+      border-radius: 20px;
+      object-fit: cover;
+    }
+    
+    .app-info h1 {
+      margin: 0 0 10px 0;
+      font-size: 2rem;
+    }
+    
+    .app-meta {
+      color: #666;
+      margin: 5px 0;
+    }
+    
+    .download-buttons {
+      display: flex;
+      gap: 15px;
+      margin: 30px 0;
+      flex-wrap: wrap;
+    }
+    
+    .btn-download {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .btn-download:hover {
+      background: #2563eb;
+    }
+    
+    .btn-secondary {
+      background: #6b7280;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    
+    .btn-back {
+      background: #f3f4f6;
+      color: #374151;
+      border: 1px solid #d1d5db;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+    
+    .btn-back:hover {
+      background: #e5e7eb;
+    }
+    
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+    
+    .info-card {
+      background: #f9fafb;
+      padding: 20px;
+      border-radius: 10px;
+      border-left: 4px solid #3b82f6;
+    }
+    
+    .info-card h3 {
+      margin: 0 0 10px 0;
+      color: #1f2937;
+    }
+    
+    .screenshots {
+      display: flex;
+      gap: 15px;
+      overflow-x: auto;
+      padding: 20px 0;
+      margin: 30px 0;
+    }
+    
+    .screenshot {
+      height: 400px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    @media (max-width: 768px) {
+      .app-header {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .app-icon {
+        margin: 0 auto;
+      }
+      
+      .screenshot {
+        height: 250px;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- HEADER -->
@@ -22,17 +143,14 @@
         <p class="brand-tagline">Apps para todos</p>
       </div>
     </div>
-    
-    <div class="header-right">
-      <button class="btn-back" onclick="window.location.href='index.html'">← Volver al inicio</button>
-    </div>
   </header>
 
-  <!-- CONTENIDO DE LA APP -->
-  <main class="app-detail-page">
-    <div id="appContainer" class="app-detail-container">
-      <div class="loading-container">
-        <p>Cargando información de la app...</p>
+  <main class="app-detail-container">
+    <button class="btn-back" onclick="window.history.back()">← Volver</button>
+    
+    <div id="appContent">
+      <div style="text-align: center; padding: 50px;">
+        <p>Cargando información de la aplicación...</p>
       </div>
     </div>
   </main>
@@ -45,10 +163,121 @@
     </div>
   </footer>
 
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
   <script src="firebase.js"></script>
-  <script src="app-detail.js"></script>
+  
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Obtener ID de la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const appId = urlParams.get('id');
+    
+    if (!appId) {
+      window.location.href = 'index.html';
+    } else {
+      cargarApp(appId);
+    }
+    
+    async function cargarApp(id) {
+      try {
+        const doc = await db.collection("apps").doc(id).get();
+        
+        if (!doc.exists) {
+          document.getElementById('appContent').innerHTML = `
+            <div style="text-align: center; padding: 50px;">
+              <h2>App no encontrada</h2>
+              <p>La aplicación que buscas no existe.</p>
+              <button class="btn-back" onclick="window.location.href='index.html'">Volver al inicio</button>
+            </div>
+          `;
+          return;
+        }
+        
+        const app = doc.data();
+        mostrarApp(app);
+        
+      } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('appContent').innerHTML = `
+          <div style="text-align: center; padding: 50px;">
+            <h2>Error al cargar</h2>
+            <p>No se pudo cargar la información.</p>
+            <button class="btn-back" onclick="window.location.href='index.html'">Volver al inicio</button>
+          </div>
+        `;
+      }
+    }
+    
+    function mostrarApp(app) {
+      // Actualizar título
+      document.title = `${app.nombre} - Appser Store`;
+      
+      // Construir HTML
+      let html = `
+        <div class="app-header">
+          <img src="${app.imagen || ''}" alt="${app.nombre}" class="app-icon">
+          <div class="app-info">
+            <h1>${app.nombre || 'Sin nombre'}</h1>
+            <p class="app-meta"><strong>Categoría:</strong> ${app.categoria || 'No especificada'}</p>
+            <p class="app-meta"><strong>Versión:</strong> ${app.version || '1.0'}</p>
+            <p class="app-meta"><strong>Tamaño:</strong> ${app.size || 'N/A'}</p>
+            <p class="app-meta">${app.internet === 'offline' ? '📴 Sin conexión necesaria' : '🌐 Necesita internet'}</p>
+          </div>
+        </div>
+        
+        <div class="download-buttons">
+          ${app.apk ? `<button class="btn-download" onclick="window.open('${app.apk}', '_blank')">⬇️ Descargar APK</button>` : ''}
+          ${app.playstoreUrl ? `<button class="btn-secondary" onclick="window.open('${app.playstoreUrl}', '_blank')">Google Play</button>` : ''}
+          ${app.mediafireUrl ? `<button class="btn-secondary" onclick="window.open('${app.mediafireUrl}', '_blank')">MediaFire</button>` : ''}
+        </div>
+        
+        <div class="info-grid">
+          ${app.descripcion ? `<div class="info-card">
+            <h3>Descripción</h3>
+            <p>${app.descripcion}</p>
+          </div>` : ''}
+          
+          ${app.requisitos ? `<div class="info-card">
+            <h3>Requisitos</h3>
+            <p>${app.requisitos}</p>
+          </div>` : ''}
+          
+          ${app.idioma ? `<div class="info-card">
+            <h3>Idioma</h3>
+            <p>${app.idioma}</p>
+          </div>` : ''}
+          
+          ${app.sistemaOperativo ? `<div class="info-card">
+            <h3>Sistema</h3>
+            <p>${app.sistemaOperativo}</p>
+          </div>` : ''}
+          
+          ${app.edad ? `<div class="info-card">
+            <h3>Edad recomendada</h3>
+            <p>${app.edad}</p>
+          </div>` : ''}
+          
+          <div class="info-card">
+            <h3>Información adicional</h3>
+            <p><strong>Licencia:</strong> ${app.tipo || 'Gratis'}</p>
+            <p><strong>Anuncios:</strong> ${app.anuncios === 'si' ? 'Sí' : 'No'}</p>
+            <p><strong>Actualización:</strong> ${app.fechaActualizacion ? new Date(app.fechaActualizacion).toLocaleDateString('es-ES') : 'No especificada'}</p>
+          </div>
+        </div>
+      `;
+      
+      // Agregar capturas si existen
+      if (app.imgSecundarias && app.imgSecundarias.length > 0) {
+        html += `<h2>Capturas de pantalla</h2>
+        <div class="screenshots">
+          ${app.imgSecundarias.map(img => `<img src="${img}" alt="Captura" class="screenshot">`).join('')}
+        </div>`;
+      }
+      
+      document.getElementById('appContent').innerHTML = html;
+    }
   </script>
 </body>
 </html>

@@ -6,6 +6,7 @@
   <title>Detalles de la App - Appser Store</title>
   <link rel="stylesheet" href="styles.css">
   <style>
+    /* Estilos específicos para la página de detalles */
     .app-detail-container {
       max-width: 1200px;
       margin: 40px auto;
@@ -17,6 +18,7 @@
       gap: 30px;
       margin-bottom: 30px;
       flex-wrap: wrap;
+      align-items: center;
     }
     
     .app-icon {
@@ -29,11 +31,13 @@
     .app-info h1 {
       margin: 0 0 10px 0;
       font-size: 2rem;
+      color: #1f2937;
     }
     
     .app-meta {
-      color: #666;
+      color: #6b7280;
       margin: 5px 0;
+      font-size: 0.95rem;
     }
     
     .download-buttons {
@@ -54,6 +58,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      transition: background 0.3s;
     }
     
     .btn-download:hover {
@@ -68,6 +73,11 @@
       border-radius: 8px;
       cursor: pointer;
       font-size: 16px;
+      transition: background 0.3s;
+    }
+    
+    .btn-secondary:hover {
+      background: #4b5563;
     }
     
     .btn-back {
@@ -78,6 +88,7 @@
       border-radius: 8px;
       cursor: pointer;
       margin-bottom: 20px;
+      transition: background 0.3s;
     }
     
     .btn-back:hover {
@@ -101,6 +112,13 @@
     .info-card h3 {
       margin: 0 0 10px 0;
       color: #1f2937;
+      font-size: 1.1rem;
+    }
+    
+    .info-card p {
+      margin: 0;
+      color: #4b5563;
+      line-height: 1.6;
     }
     
     .screenshots {
@@ -109,12 +127,29 @@
       overflow-x: auto;
       padding: 20px 0;
       margin: 30px 0;
+      scrollbar-width: thin;
     }
     
     .screenshot {
       height: 400px;
       border-radius: 10px;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      object-fit: cover;
+    }
+    
+    .loading {
+      text-align: center;
+      padding: 50px;
+      color: #6b7280;
+    }
+    
+    .error {
+      text-align: center;
+      padding: 50px;
+      color: #dc2626;
+      background: #fef2f2;
+      border-radius: 10px;
+      border: 1px solid #fecaca;
     }
     
     @media (max-width: 768px) {
@@ -149,7 +184,7 @@
     <button class="btn-back" onclick="window.history.back()">← Volver</button>
     
     <div id="appContent">
-      <div style="text-align: center; padding: 50px;">
+      <div class="loading">
         <p>Cargando información de la aplicación...</p>
       </div>
     </div>
@@ -163,61 +198,87 @@
     </div>
   </footer>
 
+  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-  <script src="firebase.js"></script>
   
   <script>
+    // Configuración de Firebase (usa la misma que en index.html)
+    // Asegúrate de que esta configuración sea IDÉNTICA a la de firebase.js
+    const firebaseConfig = {
+      apiKey: "TU_API_KEY",
+      authDomain: "TU_AUTH_DOMAIN",
+      projectId: "TU_PROJECT_ID",
+      storageBucket: "TU_STORAGE_BUCKET",
+      messagingSenderId: "TU_MESSAGING_SENDER_ID",
+      appId: "TU_APP_ID"
+    };
+    
+    // Inicializar Firebase
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+    
+    // Obtener referencia a Firestore
+    const db = firebase.firestore();
+    
     document.getElementById('year').textContent = new Date().getFullYear();
     
     // Obtener ID de la URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const appId = urlParams.get('id');
-    
-    if (!appId) {
-      window.location.href = 'index.html';
-    } else {
-      cargarApp(appId);
+    function getAppIdFromURL() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get('id');
     }
     
-    async function cargarApp(id) {
+    // Cargar la app
+    async function cargarApp() {
+      const appId = getAppIdFromURL();
+      
+      if (!appId) {
+        window.location.href = 'index.html';
+        return;
+      }
+      
       try {
-        const doc = await db.collection("apps").doc(id).get();
+        console.log("Buscando app con ID:", appId);
+        const doc = await db.collection("apps").doc(appId).get();
         
         if (!doc.exists) {
-          document.getElementById('appContent').innerHTML = `
-            <div style="text-align: center; padding: 50px;">
-              <h2>App no encontrada</h2>
-              <p>La aplicación que buscas no existe.</p>
-              <button class="btn-back" onclick="window.location.href='index.html'">Volver al inicio</button>
-            </div>
-          `;
+          mostrarError("App no encontrada", "La aplicación que buscas no existe.");
           return;
         }
         
         const app = doc.data();
+        console.log("App encontrada:", app.nombre);
         mostrarApp(app);
         
       } catch (error) {
-        console.error('Error:', error);
-        document.getElementById('appContent').innerHTML = `
-          <div style="text-align: center; padding: 50px;">
-            <h2>Error al cargar</h2>
-            <p>No se pudo cargar la información.</p>
-            <button class="btn-back" onclick="window.location.href='index.html'">Volver al inicio</button>
-          </div>
-        `;
+        console.error("Error cargando app:", error);
+        mostrarError("Error de conexión", "No se pudo conectar con la base de datos.");
       }
     }
     
+    function mostrarError(titulo, mensaje) {
+      document.getElementById('appContent').innerHTML = `
+        <div class="error">
+          <h2>${titulo}</h2>
+          <p>${mensaje}</p>
+          <button class="btn-back" onclick="window.location.href='index.html'">Volver al inicio</button>
+        </div>
+      `;
+    }
+    
     function mostrarApp(app) {
-      // Actualizar título
+      // Actualizar título de la página
       document.title = `${app.nombre} - Appser Store`;
       
       // Construir HTML
       let html = `
         <div class="app-header">
-          <img src="${app.imagen || ''}" alt="${app.nombre}" class="app-icon">
+          <img src="${app.imagen || 'https://via.placeholder.com/120?text=Sin+imagen'}" 
+               alt="${app.nombre}" 
+               class="app-icon"
+               onerror="this.src='https://via.placeholder.com/120?text=Error+imagen'">
           <div class="app-info">
             <h1>${app.nombre || 'Sin nombre'}</h1>
             <p class="app-meta"><strong>Categoría:</strong> ${app.categoria || 'No especificada'}</p>
@@ -228,41 +289,53 @@
         </div>
         
         <div class="download-buttons">
-          ${app.apk ? `<button class="btn-download" onclick="window.open('${app.apk}', '_blank')">⬇️ Descargar APK</button>` : ''}
-          ${app.playstoreUrl ? `<button class="btn-secondary" onclick="window.open('${app.playstoreUrl}', '_blank')">Google Play</button>` : ''}
-          ${app.mediafireUrl ? `<button class="btn-secondary" onclick="window.open('${app.mediafireUrl}', '_blank')">MediaFire</button>` : ''}
-        </div>
-        
+      `;
+      
+      // Agregar botones de descarga
+      if (app.apk) {
+        html += `<button class="btn-download" onclick="window.open('${app.apk}', '_blank')">⬇️ Descargar APK</button>`;
+      }
+      
+      if (app.playstoreUrl) {
+        html += `<button class="btn-secondary" onclick="window.open('${app.playstoreUrl}', '_blank')">Google Play</button>`;
+      }
+      
+      if (app.mediafireUrl) {
+        html += `<button class="btn-secondary" onclick="window.open('${app.mediafireUrl}', '_blank')">MediaFire</button>`;
+      }
+      
+      html += `</div>`;
+      
+      // Información adicional
+      html += `
         <div class="info-grid">
-          ${app.descripcion ? `<div class="info-card">
+      `;
+      
+      if (app.descripcion) {
+        html += `
+          <div class="info-card">
             <h3>Descripción</h3>
             <p>${app.descripcion}</p>
-          </div>` : ''}
-          
-          ${app.requisitos ? `<div class="info-card">
-            <h3>Requisitos</h3>
+          </div>
+        `;
+      }
+      
+      if (app.requisitos) {
+        html += `
+          <div class="info-card">
+            <h3>Requisitos del sistema</h3>
             <p>${app.requisitos}</p>
-          </div>` : ''}
-          
-          ${app.idioma ? `<div class="info-card">
-            <h3>Idioma</h3>
-            <p>${app.idioma}</p>
-          </div>` : ''}
-          
-          ${app.sistemaOperativo ? `<div class="info-card">
-            <h3>Sistema</h3>
-            <p>${app.sistemaOperativo}</p>
-          </div>` : ''}
-          
-          ${app.edad ? `<div class="info-card">
-            <h3>Edad recomendada</h3>
-            <p>${app.edad}</p>
-          </div>` : ''}
-          
+          </div>
+        `;
+      }
+      
+      html += `
           <div class="info-card">
             <h3>Información adicional</h3>
+            <p><strong>Idioma:</strong> ${app.idioma || 'No especificado'}</p>
             <p><strong>Licencia:</strong> ${app.tipo || 'Gratis'}</p>
-            <p><strong>Anuncios:</strong> ${app.anuncios === 'si' ? 'Sí' : 'No'}</p>
+            <p><strong>Anuncios:</strong> ${app.anuncios === 'si' ? 'Sí contiene' : app.anuncios === 'no' ? 'No contiene' : 'No especificado'}</p>
+            <p><strong>Edad recomendada:</strong> ${app.edad || 'No especificada'}</p>
             <p><strong>Actualización:</strong> ${app.fechaActualizacion ? new Date(app.fechaActualizacion).toLocaleDateString('es-ES') : 'No especificada'}</p>
           </div>
         </div>
@@ -270,14 +343,23 @@
       
       // Agregar capturas si existen
       if (app.imgSecundarias && app.imgSecundarias.length > 0) {
-        html += `<h2>Capturas de pantalla</h2>
-        <div class="screenshots">
-          ${app.imgSecundarias.map(img => `<img src="${img}" alt="Captura" class="screenshot">`).join('')}
-        </div>`;
+        html += `
+          <h2 style="margin-top: 40px;">Capturas de pantalla</h2>
+          <div class="screenshots">
+        `;
+        
+        app.imgSecundarias.forEach(img => {
+          html += `<img src="${img}" alt="Captura" class="screenshot" onerror="this.style.display='none'">`;
+        });
+        
+        html += `</div>`;
       }
       
       document.getElementById('appContent').innerHTML = html;
     }
+    
+    // Iniciar cuando la página cargue
+    document.addEventListener('DOMContentLoaded', cargarApp);
   </script>
 </body>
 </html>

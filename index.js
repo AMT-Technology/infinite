@@ -70,7 +70,8 @@ function renderApps() {
 
     // Redirigir a la página de detalles
     card.onclick = () => {
-      window.location.href = `app-detail.html?id=${app.id}`;
+      window.location.href = `app-detail.html?app=${app.slug || app.id}`;
+
     };
     
     appsGrid.appendChild(card);

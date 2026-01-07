@@ -402,41 +402,29 @@ function renderAppDetails(app) {
 // ====== Inicializar eventos ======
 function inicializarEventos(app) {
   // Botón de descarga principal
-  const likeBtn = document.getElementById('likeBtn');
-if (likeBtn) {
-
-  likeBtn.onclick = async () => {
-    const votes = JSON.parse(localStorage.getItem("appsmart_votes") || "{}");
-
-    // Evitar doble voto
-    if (votes[app.id] && votes[app.id].liked) return;
-
-    try {
-      // Incrementar en Firestore
-      await db.collection("apps").doc(app.id).update({
-        likes: firebase.firestore.FieldValue.increment(1)
+  const installBtn = document.getElementById('installBtn');
+  if (installBtn) {
+    installBtn.onclick = () => {
+      if (!app.apk) {
+        alert("🚫 No hay archivo disponible.");
+        return;
+      }
+      
+      installBtn.disabled = true;
+      installBtn.innerHTML = '<img src="assets/icons/descargar.png" alt="Descargando...">';
+      
+      // Incrementar contador
+      db.collection("apps").doc(app.id).update({
+        descargasReales: firebase.firestore.FieldValue.increment(1)
+      }).then(() => {
+        window.open(app.apk, '_blank');
+        setTimeout(() => {
+          installBtn.disabled = false;
+          installBtn.innerHTML = '<img src="assets/icons/descargar.png" alt="Descarga Directa">';
+        }, 1000);
       });
-
-      // Guardar localmente que ya votó
-      votes[app.id] = { liked: true };
-      localStorage.setItem("appsmart_votes", JSON.stringify(votes));
-
-      // 🔥 ACTUALIZAR app.likes
-      app.likes = (app.likes || 0) + 1;
-
-      // 🔥 Actualizar UI
-      likeBtn.innerHTML = `❤️ Ya te gusta (${app.likes})`;
-      likeBtn.disabled = true;
-
-    } catch (e) {
-      console.error("Error al dar like:", e);
-    }
-  };
-}
-
-// ⬅️ ESTE CIERRE FALTABA
-} 
-
+    };
+  }
 
   // Botones extra
   const botones = [

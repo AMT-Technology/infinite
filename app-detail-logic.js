@@ -462,23 +462,39 @@ function inicializarEventos(app) {
   }
 
   // Like
-  const likeBtn = document.getElementById('likeBtn');
-  if (likeBtn) {
-    likeBtn.onclick = () => {
-      const votes = JSON.parse(localStorage.getItem("appsmart_votes") || "{}");
-      if (votes[app.id] && votes[app.id].liked) return;
-      
-      db.collection("apps").doc(app.id).update({
+  // Botón de like
+const likeBtn = document.getElementById('likeBtn');
+if (likeBtn) {
+
+  likeBtn.onclick = async () => {
+    const votes = JSON.parse(localStorage.getItem("appsmart_votes") || "{}");
+
+    // Evitar doble voto
+    if (votes[app.id] && votes[app.id].liked) return;
+
+    try {
+      // Incrementar en Firestore
+      await db.collection("apps").doc(app.id).update({
         likes: firebase.firestore.FieldValue.increment(1)
-      }).then(() => {
-        votes[app.id] = { liked: true };
-        localStorage.setItem("appsmart_votes", JSON.stringify(votes));
-        
-        likeBtn.textContent = `❤️ Ya te gusta (${(app.likes || 0) + 1})`;
-        likeBtn.disabled = true;
       });
-    };
-  }
+
+      // Guardar localmente que ya votó
+      votes[app.id] = { liked: true };
+      localStorage.setItem("appsmart_votes", JSON.stringify(votes));
+
+      // 🔥 ACTUALIZAR app.likes PARA QUE LA UI SEA CORRECTA
+      app.likes = (app.likes || 0) + 1;
+
+      // 🔥 NO BORRAR CLASES NI ID, SOLO CAMBIAR TEXTO
+      likeBtn.innerHTML = `❤️ Ya te gusta (${app.likes})`;
+      likeBtn.disabled = true;
+
+    } catch (e) {
+      console.error("Error al dar like:", e);
+    }
+  };
+}
+
 }
 
 // ====== Reseñas ======

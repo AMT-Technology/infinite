@@ -1,4 +1,4 @@
-si seras , si aqui kmismo esta el htm tambien : // ====== Referencias DOM ======
+// ====== Referencias DOM ======
 const detailContent = document.getElementById("detailContent");
 const searchInput = document.getElementById("searchInput");
 const chips = document.querySelectorAll(".chip");

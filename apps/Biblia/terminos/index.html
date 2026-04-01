@@ -2,382 +2,188 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Términos de Servicio - Biblia Universal con audio</title>
-  <meta name="description" content="Términos de Servicio de Biblia Universal con audio, desarrollada por AppsMart Technology." />
+
   <style>
     :root{
-      --bg:#f4f7fb;
-      --card:#ffffff;
+      --primary:#243a55;
+      --primary-2:#2f5377;
       --text:#1f2937;
-      --muted:#5b6472;
-      --primary:#1e3a5f;
-      --primary-2:#2c5a87;
-      --accent:#dfeaf7;
       --border:#e5e7eb;
-      --shadow:0 10px 30px rgba(0,0,0,.08);
-      --radius:18px;
     }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
+
     body{
       margin:0;
-      font-family:Arial, Helvetica, sans-serif;
-      background:radial-gradient(circle at top left, #eef5ff 0%, #f4f7fb 35%, #f4f7fb 100%);
+      font-family:Arial, sans-serif;
+      background:#f4f7fb;
       color:var(--text);
-      line-height:1.75;
     }
+
+    /* 🔵 NAV SUPERIOR (IGUAL A POLÍTICAS) */
     .top-nav{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  backdrop-filter:blur(10px);
-  background:linear-gradient(135deg, var(--primary), var(--primary-2));
-  border-bottom:1px solid rgba(255,255,255,.15);
-}
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:linear-gradient(135deg, var(--primary), var(--primary-2));
+    }
+
     .top-nav-inner{
       max-width:1100px;
       margin:0 auto;
-      padding:12px 20px;
+      padding:14px 20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .top-brand{
+      color:#fff;
+      font-weight:700;
+      font-size:1rem;
+    }
+
+    .top-nav-links{
       display:flex;
       gap:10px;
-      flex-wrap:wrap;
-      justify-content:center;
     }
+
     .top-link{
+      color:#fff;
       text-decoration:none;
-      color:#fff;
-      background:linear-gradient(135deg, var(--primary), var(--primary-2));
-      border:1px solid rgba(255,255,255,.18);
-      padding:10px 14px;
-      border-radius:999px;
-      font-size:.95rem;
-      font-weight:600;
-      transition:.2s ease;
-      box-shadow:0 6px 18px rgba(30,58,95,.18);
-    }
-    .top-link:hover{
-      background:linear-gradient(135deg, #244b77, #32689b);
-      color:#fff;
-      transform:translateY(-1px);
-    }
-    .top-link.active{
-      background:linear-gradient(135deg, #16314f, #254f79);
-      color:#fff;
-      box-shadow:0 8px 20px rgba(30,58,95,.28);
-    }
-    .hero{
-      background:linear-gradient(135deg, var(--primary), #244b77 55%, var(--primary-2));
-      color:#fff;
-      padding:64px 20px 42px;
-    }
-    .hero-inner{max-width:1100px; margin:0 auto}
-    .eyebrow{
-      display:inline-block;
-      background:rgba(255,255,255,.12);
-      border:1px solid rgba(255,255,255,.2);
-      border-radius:999px;
       padding:8px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.10);
       font-size:.9rem;
-      margin-bottom:16px;
+      transition:.2s;
     }
+
+    .top-link:hover{
+      background:rgba(255,255,255,.2);
+    }
+
+    .top-link.active{
+      background:rgba(255,255,255,.25);
+    }
+
+    /* HERO */
+    .hero{
+      background:linear-gradient(135deg, var(--primary), var(--primary-2));
+      color:#fff;
+      padding:60px 20px 40px;
+    }
+
+    .hero-inner{
+      max-width:1100px;
+      margin:0 auto;
+    }
+
     .hero h1{
-      margin:0 0 14px;
-      font-size:2.3rem;
-      line-height:1.15;
+      margin:0 0 10px;
+      font-size:2rem;
     }
+
     .hero p{
       margin:0;
-      max-width:780px;
-      color:rgba(255,255,255,.92);
-      font-size:1.05rem;
+      max-width:700px;
     }
-    .wrap{
-      max-width:1100px;
-      margin:-24px auto 48px;
-      padding:0 20px;
+
+    /* CONTENIDO */
+    .container{
+      max-width:900px;
+      margin:40px auto;
+      background:#fff;
+      padding:40px 30px;
+      border-radius:12px;
+      box-shadow:0 5px 20px rgba(0,0,0,0.08);
     }
-    .grid{
-      display:grid;
-      grid-template-columns:300px 1fr;
-      gap:24px;
-      align-items:start;
-    }
-    .toc,.content{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-    }
-    .toc{
-      position:sticky;
-      top:78px;
-      padding:22px 18px;
-    }
-    .toc h2{
-      margin:0 0 14px;
-      font-size:1.05rem;
-      color:var(--primary);
-    }
-    .toc a{
-      display:block;
-      text-decoration:none;
-      color:var(--muted);
-      padding:10px 12px;
-      border-radius:10px;
-      margin-bottom:6px;
-      transition:.2s ease;
-      font-size:.96rem;
-    }
-    .toc a:hover{
-      background:var(--accent);
-      color:var(--primary);
-    }
-    .content{padding:34px 30px}
-    .highlight{
-      background:#f8fbff;
-      border:1px solid #d7e7fb;
-      border-left:5px solid var(--primary-2);
-      border-radius:14px;
-      padding:18px 18px 16px;
-      margin-bottom:28px;
-    }
-    .highlight h2{
-      margin:0 0 8px;
-      color:var(--primary);
-      font-size:1.1rem;
-    }
-    section{
-      margin-bottom:34px;
-      scroll-margin-top:110px;
-    }
+
     h2{
       color:var(--primary);
-      font-size:1.28rem;
-      margin:0 0 12px;
+      margin-top:30px;
     }
+
     p{
-      margin:0 0 14px;
       text-align:justify;
     }
-    ul{
-      margin:0 0 14px 20px;
-      padding:0;
-    }
-    li{margin:0 0 10px}
-    .meta{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-top:18px;
-    }
-    .pill{
-      background:#eef4fb;
-      color:var(--primary);
-      border:1px solid #dbe8f7;
-      padding:10px 14px;
-      border-radius:999px;
-      font-size:.92rem;
-    }
-    .contact-box{
-      background:linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
-      border:1px solid #d9e7f7;
-      border-radius:16px;
-      padding:18px;
-    }
-    a{
-      color:var(--primary-2);
-      word-break:break-word;
-    }
-    footer{
+
+    .footer{
+      margin-top:40px;
       text-align:center;
-      color:var(--muted);
-      font-size:.92rem;
-      margin-top:30px;
-      padding-top:22px;
+      color:#666;
+      font-size:.9rem;
       border-top:1px solid var(--border);
+      padding-top:20px;
     }
-    @media (max-width: 900px){
-      .grid{grid-template-columns:1fr}
-      .toc{position:relative; top:0}
-      .hero h1{font-size:1.9rem}
-      .content{padding:26px 20px}
-    }
-    @media (max-width: 540px){
-      .hero{padding:50px 16px 34px}
-      .wrap{padding:0 16px}
-      .hero h1{font-size:1.65rem}
-      .hero p{font-size:1rem}
+
+    @media(max-width:700px){
       .top-nav-inner{
-        padding:10px 14px;
-        justify-content:flex-start;
+        flex-direction:column;
+        align-items:flex-start;
+        gap:10px;
       }
-      .top-link{
-        font-size:.9rem;
-        padding:9px 12px;
+
+      .top-nav-links{
+        width:100%;
+        flex-wrap:wrap;
       }
     }
   </style>
 </head>
+
 <body>
 
-  <nav class="top-nav">
-    <div class="top-nav-inner">
+<!-- 🔵 NAV -->
+<nav class="top-nav">
+  <div class="top-nav-inner">
+    <div class="top-brand">Biblia Universal con audio</div>
+
+    <div class="top-nav-links">
       <a href="/apps/Biblia/politicas/" class="top-link">Política de Privacidad</a>
       <a href="/apps/Biblia/legal/" class="top-link">Aviso Legal</a>
       <a href="/apps/Biblia/terminos/" class="top-link active">Términos de Servicio</a>
     </div>
-  </nav>
+  </div>
+</nav>
 
-  <header class="hero">
-    <div class="hero-inner">
-      <span class="eyebrow">AppsMart Technology</span>
-      <h1>Términos de Servicio</h1>
-      <p>
-        Estos Términos de Servicio regulan el acceso, navegación y uso de
-        <strong>Biblia Universal con audio</strong>.
-      </p>
-      <div class="meta">
-        <span class="pill">Aplicación: Biblia Universal con audio</span>
-        <span class="pill">Última actualización: abril de 2026</span>
-        <span class="pill">Idioma oficial: Español</span>
-      </div>
-    </div>
-  </header>
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <h1>Términos de Servicio</h1>
+    <p>
+      Estos términos regulan el uso de la aplicación Biblia Universal con audio.
+    </p>
+  </div>
+</header>
 
-  <main class="wrap">
-    <div class="grid">
-      <nav class="toc" aria-label="Tabla de contenido">
-        <h2>Contenido</h2>
-        <a href="#aceptacion">1. Aceptación de los términos</a>
-        <a href="#uso-servicio">2. Uso del servicio</a>
-        <a href="#cuentas">3. Cuentas y acceso</a>
-        <a href="#contenido">4. Contenido y licencias</a>
-        <a href="#audio">5. Funciones de audio</a>
-        <a href="#compras">6. Compras, suscripciones y donaciones</a>
-        <a href="#conducta">7. Conducta del usuario</a>
-        <a href="#suspension">8. Suspensión o cancelación</a>
-        <a href="#garantias">9. Exclusión de garantías</a>
-        <a href="#responsabilidad">10. Limitación de responsabilidad</a>
-        <a href="#modificaciones">11. Modificaciones del servicio</a>
-        <a href="#ley">12. Legislación aplicable</a>
-        <a href="#contacto">13. Contacto</a>
-      </nav>
+<!-- CONTENIDO -->
+<div class="container">
 
-      <article class="content">
-        <div class="highlight">
-          <h2>Resumen</h2>
-          <p>
-            Al usar <strong>Biblia Universal con audio</strong>, aceptas estos términos, el Aviso Legal
-            y la Política de Privacidad.
-          </p>
-        </div>
+  <h2>1. Aceptación</h2>
+  <p>
+    Al usar la aplicación, aceptas estos términos.
+  </p>
 
-        <section id="aceptacion">
-          <h2>1. Aceptación de los términos</h2>
-          <p>
-            Al descargar, instalar, acceder o utilizar la aplicación <strong>Biblia Universal con audio</strong>,
-            el usuario acepta quedar vinculado por estos Términos de Servicio.
-          </p>
-        </section>
+  <h2>2. Uso</h2>
+  <p>
+    La app es para uso personal, educativo y devocional.
+  </p>
 
-        <section id="uso-servicio">
-          <h2>2. Uso del servicio</h2>
-          <p>
-            La aplicación se ofrece para fines personales, informativos, educativos y devocionales.
-          </p>
-        </section>
+  <h2>3. Contenido</h2>
+  <p>
+    Puede incluir textos de dominio público y contenido adaptado.
+  </p>
 
-        <section id="cuentas">
-          <h2>3. Cuentas y acceso</h2>
-          <p>
-            Algunas funciones pueden requerir registro, inicio de sesión o conexión a internet.
-          </p>
-        </section>
+  <h2>4. Responsabilidad</h2>
+  <p>
+    Se ofrece sin garantías absolutas.
+  </p>
 
-        <section id="contenido">
-          <h2>4. Contenido y licencias</h2>
-          <p>
-            La app puede incluir textos bíblicos de dominio público o de uso abierto, así como adaptaciones
-            desarrolladas por AppsMart Technology.
-          </p>
-        </section>
+  <div class="footer">
+    © AppsMart Technology — abril 2026
+  </div>
 
-        <section id="audio">
-          <h2>5. Funciones de audio</h2>
-          <p>
-            Las funciones de audio, narración o lectura en voz alta pueden variar según el idioma,
-            dispositivo y compatibilidad técnica.
-          </p>
-        </section>
-
-        <section id="compras">
-          <h2>6. Compras, suscripciones y donaciones</h2>
-          <p>
-            La app puede incluir compras opcionales, suscripciones, donaciones o contenido premium.
-          </p>
-        </section>
-
-        <section id="conducta">
-          <h2>7. Conducta del usuario</h2>
-          <ul>
-            <li>No utilizar la app para fines ilícitos o fraudulentos.</li>
-            <li>No intentar acceder sin autorización a sistemas, cuentas o datos.</li>
-            <li>No copiar o revender partes protegidas de la app sin permiso.</li>
-          </ul>
-        </section>
-
-        <section id="suspension">
-          <h2>8. Suspensión o cancelación</h2>
-          <p>
-            AppsMart Technology podrá suspender o cancelar el acceso cuando detecte incumplimientos.
-          </p>
-        </section>
-
-        <section id="garantias">
-          <h2>9. Exclusión de garantías</h2>
-          <p>
-            La aplicación se proporciona “tal cual” y según disponibilidad.
-          </p>
-        </section>
-
-        <section id="responsabilidad">
-          <h2>10. Limitación de responsabilidad</h2>
-          <p>
-            AppsMart Technology no será responsable por daños derivados del uso o imposibilidad de uso
-            de la aplicación dentro de los límites permitidos por la ley.
-          </p>
-        </section>
-
-        <section id="modificaciones">
-          <h2>11. Modificaciones del servicio</h2>
-          <p>
-            AppsMart Technology podrá modificar, actualizar o descontinuar funciones de la aplicación.
-          </p>
-        </section>
-
-        <section id="ley">
-          <h2>12. Legislación aplicable</h2>
-          <p>
-            Estos Términos de Servicio se interpretarán conforme a la legislación aplicable.
-          </p>
-        </section>
-
-        <section id="contacto">
-          <h2>13. Contacto</h2>
-          <div class="contact-box">
-            <p>Para consultas relacionadas con estos Términos de Servicio, puedes escribir a:</p>
-            <p><strong>AppsMart Technology</strong></p>
-            <p><strong>Correo:</strong> <a href="mailto:support@rap-infinite.online">support@rap-infinite.online</a></p>
-          </div>
-        </section>
-
-        <footer>
-          © AppsMart Technology — Términos de Servicio de Biblia Universal con audio
-        </footer>
-      </article>
-    </div>
-  </main>
+</div>
 
 </body>
 </html>

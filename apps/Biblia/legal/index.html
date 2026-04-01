@@ -2,161 +2,353 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Aviso Legal - Biblia Universal</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aviso Legal - Biblia Universal con audio</title>
+  <meta name="description" content="Aviso Legal de Biblia Universal con audio, desarrollada por AppsMart Technology." />
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
-      margin: 0;
-      padding: 0;
-      color: #222;
-      line-height: 1.7;
+    :root{
+      --bg:#f4f7fb;
+      --card:#ffffff;
+      --text:#1f2937;
+      --muted:#5b6472;
+      --primary:#1e3a5f;
+      --primary-2:#2c5a87;
+      --accent:#dfeaf7;
+      --border:#e5e7eb;
+      --shadow:0 10px 30px rgba(0,0,0,.08);
+      --radius:18px;
     }
-
-    .container {
-      max-width: 900px;
-      margin: 40px auto;
-      background: #fff;
-      padding: 40px 30px;
-      border-radius: 12px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:radial-gradient(circle at top left, #eef5ff 0%, #f4f7fb 35%, #f4f7fb 100%);
+      color:var(--text);
+      line-height:1.75;
     }
-
-    h1 {
-      text-align: center;
-      color: #1e3a5f;
-      margin-bottom: 30px;
+    .top-nav{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      backdrop-filter:blur(10px);
+      background:rgba(255,255,255,.88);
+      border-bottom:1px solid rgba(229,231,235,.9);
     }
-
-    h2 {
-      color: #2c5a87;
-      margin-top: 30px;
-      margin-bottom: 10px;
-      font-size: 1.2rem;
+    .top-nav-inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:12px 20px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:center;
     }
-
-    p {
-      margin-bottom: 15px;
-      text-align: justify;
+    .top-link{
+      text-decoration:none;
+      color:var(--primary);
+      background:#eef4fb;
+      border:1px solid #dbe8f7;
+      padding:10px 14px;
+      border-radius:999px;
+      font-size:.95rem;
+      transition:.2s ease;
     }
-
-    strong {
-      color: #000;
+    .top-link:hover{
+      background:var(--primary);
+      color:#fff;
     }
-
-    .footer {
-      margin-top: 40px;
-      padding-top: 20px;
-      border-top: 1px solid #ddd;
-      font-size: 0.9rem;
-      color: #555;
-      text-align: center;
+    .hero{
+      background:linear-gradient(135deg, var(--primary), #244b77 55%, var(--primary-2));
+      color:#fff;
+      padding:64px 20px 42px;
     }
-
-    @media (max-width: 600px) {
-      .container {
-        margin: 20px;
-        padding: 25px 20px;
+    .hero-inner{max-width:1100px; margin:0 auto}
+    .eyebrow{
+      display:inline-block;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.2);
+      border-radius:999px;
+      padding:8px 14px;
+      font-size:.9rem;
+      margin-bottom:16px;
+    }
+    .hero h1{
+      margin:0 0 14px;
+      font-size:2.3rem;
+      line-height:1.15;
+    }
+    .hero p{
+      margin:0;
+      max-width:780px;
+      color:rgba(255,255,255,.92);
+      font-size:1.05rem;
+    }
+    .wrap{
+      max-width:1100px;
+      margin:-24px auto 48px;
+      padding:0 20px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:300px 1fr;
+      gap:24px;
+      align-items:start;
+    }
+    .toc,.content{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .toc{
+      position:sticky;
+      top:78px;
+      padding:22px 18px;
+    }
+    .toc h2{
+      margin:0 0 14px;
+      font-size:1.05rem;
+      color:var(--primary);
+    }
+    .toc a{
+      display:block;
+      text-decoration:none;
+      color:var(--muted);
+      padding:10px 12px;
+      border-radius:10px;
+      margin-bottom:6px;
+      transition:.2s ease;
+      font-size:.96rem;
+    }
+    .toc a:hover{
+      background:var(--accent);
+      color:var(--primary);
+    }
+    .content{padding:34px 30px}
+    .highlight{
+      background:#f8fbff;
+      border:1px solid #d7e7fb;
+      border-left:5px solid var(--primary-2);
+      border-radius:14px;
+      padding:18px 18px 16px;
+      margin-bottom:28px;
+    }
+    .highlight h2{
+      margin:0 0 8px;
+      color:var(--primary);
+      font-size:1.1rem;
+    }
+    section{
+      margin-bottom:34px;
+      scroll-margin-top:110px;
+    }
+    h2{
+      color:var(--primary);
+      font-size:1.28rem;
+      margin:0 0 12px;
+    }
+    p{
+      margin:0 0 14px;
+      text-align:justify;
+    }
+    ul{
+      margin:0 0 14px 20px;
+      padding:0;
+    }
+    li{margin:0 0 10px}
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:18px;
+    }
+    .pill{
+      background:#eef4fb;
+      color:var(--primary);
+      border:1px solid #dbe8f7;
+      padding:10px 14px;
+      border-radius:999px;
+      font-size:.92rem;
+    }
+    .contact-box{
+      background:linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+      border:1px solid #d9e7f7;
+      border-radius:16px;
+      padding:18px;
+    }
+    a{
+      color:var(--primary-2);
+      word-break:break-word;
+    }
+    footer{
+      text-align:center;
+      color:var(--muted);
+      font-size:.92rem;
+      margin-top:30px;
+      padding-top:22px;
+      border-top:1px solid var(--border);
+    }
+    @media (max-width: 900px){
+      .grid{grid-template-columns:1fr}
+      .toc{position:relative; top:0}
+      .hero h1{font-size:1.9rem}
+      .content{padding:26px 20px}
+    }
+    @media (max-width: 540px){
+      .hero{padding:50px 16px 34px}
+      .wrap{padding:0 16px}
+      .hero h1{font-size:1.65rem}
+      .hero p{font-size:1rem}
+      .top-nav-inner{
+        padding:10px 14px;
+        justify-content:flex-start;
+      }
+      .top-link{
+        font-size:.9rem;
+        padding:9px 12px;
       }
     }
   </style>
 </head>
-
 <body>
-  <div class="container">
 
-    <h1>Aviso Legal</h1>
-
-    <h2>Propiedad intelectual</h2>
-    <p>
-      Esta aplicación (<strong>Biblia Universal</strong>) es desarrollada por <strong>AppsMart Technology</strong>.
-      Todos los derechos sobre el desarrollo, diseño, programación, estructura y contenido actualizado
-      pertenecen a AppsMart Technology, salvo aquellos textos que se encuentren en dominio público.
-    </p>
-
-    <h2>Uso del texto bíblico</h2>
-    <p>
-      Parte del contenido se basa en la <strong>Biblia Reina-Valera 1909</strong>, una traducción de dominio público.
-      El texto ha sido adaptado al español moderno con fines exclusivamente de comprensión lingüística
-      y accesibilidad.
-    </p>
-
-    <h2>Fuentes y traducciones bíblicas</h2>
-    <p>
-      La aplicación utiliza diversas traducciones bíblicas de dominio público o con licencias abiertas,
-      obtenidas de fuentes confiables.
-    </p>
-
-    <p>
-      <strong>Español:</strong> Basada en la Biblia Reina-Valera 1909 (dominio público),
-      con adaptación lingüística propia.
-    </p>
-
-    <p>
-      <strong>Portugués:</strong> Se utiliza la <strong>Bíblia Portuguesa Mundial</strong>,
-      obtenida de fuentes públicas como eBible.org. Esta traducción es de dominio público y puede
-      encontrarse en proceso de revisión. El contenido ha sido adaptado en formato para su uso dentro
-      de la aplicación, sin conservar necesariamente el formato editorial original.
-    </p>
-
-    <p>
-      <strong>Inglés:</strong> Se utiliza la <strong>World English Bible (WEB)</strong>,
-      una traducción de dominio público. "World English Bible" es una marca registrada de eBible.org.
-      En caso de modificaciones del texto, estas no se presentan bajo dicha denominación para evitar confusión.
-    </p>
-
-    <p>
-      Las traducciones utilizadas pueden ser adaptadas, reorganizadas o actualizadas para mejorar la experiencia
-      del usuario, manteniendo siempre el respeto a su carácter de dominio público cuando corresponda.
-    </p>
-
-    <h2>Derechos de uso</h2>
-    <p>
-      El contenido adaptado y presentado dentro de la aplicación constituye una obra derivada desarrollada
-      por AppsMart Technology. El usuario puede leer, citar y compartir pasajes con fines personales,
-      educativos o devocionales.
-    </p>
-
-    <p>
-      No está permitido reproducir, distribuir o comercializar el contenido adaptado de la aplicación
-      sin autorización expresa de AppsMart Technology.
-    </p>
-
-    <h2>Publicidad y compras dentro de la app</h2>
-    <p>
-      La aplicación puede mostrar anuncios o incluir funciones de pago opcionales (suscripciones,
-      donaciones o contenido adicional). Estos ingresos permiten mantener y mejorar el servicio.
-    </p>
-
-    <p>
-      AppsMart Technology no garantiza la disponibilidad continua ni el correcto funcionamiento de
-      servicios de terceros relacionados con publicidad o pagos.
-    </p>
-
-    <h2>Servicios en línea y autenticación</h2>
-    <p>
-      Algunas funciones pueden requerir conexión a internet o inicio de sesión.
-      Los datos mínimos necesarios (como el correo electrónico) se utilizan exclusivamente
-      para la operación de la aplicación y no se comparten con terceros fuera de los servicios necesarios.
-    </p>
-
-    <h2>Exención de responsabilidad</h2>
-    <p>
-      El contenido de la aplicación se proporciona “tal cual”, sin garantías de exactitud absoluta,
-      disponibilidad continua o ausencia de errores.
-    </p>
-
-    <p>
-      AppsMart Technology no se hace responsable de daños, pérdidas o interpretaciones derivadas
-      del uso de la aplicación o del contenido presentado.
-    </p>
-
-    <div class="footer">
-      Última actualización: abril de 2026
+  <nav class="top-nav">
+    <div class="top-nav-inner">
+      <a href="/apps/Biblia/politicas/" class="top-link">Política de Privacidad</a>
+      <a href="/apps/Biblia/legal/" class="top-link">Aviso Legal</a>
+      <a href="/apps/Biblia/terminos/" class="top-link">Términos de Servicio</a>
     </div>
+  </nav>
 
-  </div>
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="eyebrow">AppsMart Technology</span>
+      <h1>Aviso Legal</h1>
+      <p>
+        Este Aviso Legal regula el acceso, uso, contenido, propiedad intelectual y condiciones generales
+        relacionadas con la aplicación <strong>Biblia Universal con audio</strong>.
+      </p>
+      <div class="meta">
+        <span class="pill">Aplicación: Biblia Universal con audio</span>
+        <span class="pill">Última actualización: abril de 2026</span>
+        <span class="pill">Idioma oficial: Español</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="grid">
+      <nav class="toc" aria-label="Tabla de contenido">
+        <h2>Contenido</h2>
+        <a href="#propiedad">1. Propiedad intelectual</a>
+        <a href="#texto-biblico">2. Uso del texto bíblico</a>
+        <a href="#fuentes">3. Fuentes y traducciones bíblicas</a>
+        <a href="#derechos-uso">4. Derechos de uso</a>
+        <a href="#audio">5. Contenido de audio y funcionalidades</a>
+        <a href="#publicidad">6. Publicidad y compras dentro de la app</a>
+        <a href="#servicios">7. Servicios en línea y autenticación</a>
+        <a href="#responsabilidad">8. Exención de responsabilidad</a>
+        <a href="#cambios">9. Cambios al contenido legal</a>
+        <a href="#contacto">10. Contacto</a>
+      </nav>
+
+      <article class="content">
+        <div class="highlight">
+          <h2>Resumen</h2>
+          <p>
+            <strong>Biblia Universal con audio</strong> incluye contenido bíblico basado en traducciones
+            de dominio público o de uso abierto, junto con adaptaciones, organización, diseño,
+            funcionalidades y experiencia de uso desarrolladas por AppsMart Technology.
+          </p>
+        </div>
+
+        <section id="propiedad">
+          <h2>1. Propiedad intelectual</h2>
+          <p>
+            La aplicación <strong>Biblia Universal con audio</strong> es desarrollada y administrada por
+            <strong>AppsMart Technology</strong>. Todos los derechos sobre el desarrollo técnico, diseño,
+            programación, interfaz, estructura, compilación, funcionalidades, elementos gráficos, audio
+            generado o integrado, y contenido adaptado dentro de la aplicación pertenecen a AppsMart Technology,
+            salvo aquellos materiales que expresamente sean de dominio público o pertenezcan a terceros.
+          </p>
+        </section>
+
+        <section id="texto-biblico">
+          <h2>2. Uso del texto bíblico</h2>
+          <p>
+            Parte del contenido bíblico disponible en la aplicación se basa en traducciones de dominio público,
+            incluyendo la <strong>Biblia Reina-Valera 1909</strong>, utilizada como base textual para la versión en español.
+          </p>
+        </section>
+
+        <section id="fuentes">
+          <h2>3. Fuentes y traducciones bíblicas</h2>
+          <ul>
+            <li><strong>Español:</strong> base textual derivada de la Biblia Reina-Valera 1909, de dominio público, con adaptación lingüística y de formato propia.</li>
+            <li><strong>Portugués:</strong> uso de la <strong>Bíblia Portuguesa Mundial</strong>, obtenida de fuentes públicas como eBible.org.</li>
+            <li><strong>Inglés:</strong> uso de la <strong>World English Bible (WEB)</strong>, traducción de dominio público.</li>
+          </ul>
+        </section>
+
+        <section id="derechos-uso">
+          <h2>4. Derechos de uso</h2>
+          <p>
+            El usuario puede utilizar la aplicación para fines personales, educativos, informativos o devocionales.
+          </p>
+        </section>
+
+        <section id="audio">
+          <h2>5. Contenido de audio y funcionalidades</h2>
+          <p>
+            La aplicación puede incluir funciones de audio, lectura en voz alta, narración y reproducción
+            de contenido bíblico.
+          </p>
+        </section>
+
+        <section id="publicidad">
+          <h2>6. Publicidad y compras dentro de la app</h2>
+          <p>
+            La aplicación puede mostrar anuncios o incluir funciones de pago opcionales.
+          </p>
+        </section>
+
+        <section id="servicios">
+          <h2>7. Servicios en línea y autenticación</h2>
+          <p>
+            Algunas funciones pueden requerir conexión a internet, autenticación de usuario o sincronización.
+          </p>
+        </section>
+
+        <section id="responsabilidad">
+          <h2>8. Exención de responsabilidad</h2>
+          <p>
+            La aplicación, su contenido y sus funciones se proporcionan “tal cual” y según disponibilidad.
+          </p>
+        </section>
+
+        <section id="cambios">
+          <h2>9. Cambios al contenido legal</h2>
+          <p>
+            AppsMart Technology podrá actualizar este Aviso Legal cuando resulte necesario.
+          </p>
+        </section>
+
+        <section id="contacto">
+          <h2>10. Contacto</h2>
+          <div class="contact-box">
+            <p>Si tienes dudas sobre este Aviso Legal, puedes comunicarte con:</p>
+            <p><strong>AppsMart Technology</strong></p>
+            <p><strong>Correo:</strong> <a href="mailto:support@rap-infinite.online">support@rap-infinite.online</a></p>
+          </div>
+        </section>
+
+        <footer>
+          © AppsMart Technology — Aviso Legal de Biblia Universal con audio
+        </footer>
+      </article>
+    </div>
+  </main>
+
 </body>
 </html>

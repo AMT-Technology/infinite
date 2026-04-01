@@ -46,17 +46,25 @@
     }
     .top-link{
       text-decoration:none;
-      color:var(--primary);
-      background:#eef4fb;
-      border:1px solid #dbe8f7;
+      color:#fff;
+      background:linear-gradient(135deg, var(--primary), var(--primary-2));
+      border:1px solid rgba(255,255,255,.18);
       padding:10px 14px;
       border-radius:999px;
       font-size:.95rem;
+      font-weight:600;
       transition:.2s ease;
+      box-shadow:0 6px 18px rgba(30,58,95,.18);
     }
     .top-link:hover{
-      background:var(--primary);
+      background:linear-gradient(135deg, #244b77, #32689b);
       color:#fff;
+      transform:translateY(-1px);
+    }
+    .top-link.active{
+      background:linear-gradient(135deg, #16314f, #254f79);
+      color:#fff;
+      box-shadow:0 8px 20px rgba(30,58,95,.28);
     }
     .hero{
       background:linear-gradient(135deg, var(--primary), #244b77 55%, var(--primary-2));
@@ -217,7 +225,7 @@
     <div class="top-nav-inner">
       <a href="/apps/Biblia/politicas/" class="top-link">Política de Privacidad</a>
       <a href="/apps/Biblia/legal/" class="top-link">Aviso Legal</a>
-      <a href="/apps/Biblia/terminos/" class="top-link">Términos de Servicio</a>
+      <a href="/apps/Biblia/terminos/" class="top-link active">Términos de Servicio</a>
     </div>
   </nav>
 

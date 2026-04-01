@@ -18,33 +18,66 @@
       --shadow:0 10px 30px rgba(0,0,0,.08);
       --radius:18px;
     }
-
     *{box-sizing:border-box}
-
-    html{
-      scroll-behavior:smooth;
-    }
-
+    html{scroll-behavior:smooth}
     body{
       margin:0;
       font-family:Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at top left, #eef5ff 0%, #f4f7fb 35%, #f4f7fb 100%);
+      background:radial-gradient(circle at top left, #eef5ff 0%, #f4f7fb 35%, #f4f7fb 100%);
       color:var(--text);
       line-height:1.75;
     }
-
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      backdrop-filter:blur(10px);
+      background:rgba(16, 34, 58, .92);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .topbar-inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:12px 20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+    .brand{
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+      font-size:1rem;
+    }
+    .topnav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .topnav a{
+      color:rgba(255,255,255,.9);
+      text-decoration:none;
+      padding:10px 14px;
+      border-radius:999px;
+      font-size:.95rem;
+      transition:.2s ease;
+    }
+    .topnav a:hover,
+    .topnav a.active{
+      background:rgba(255,255,255,.14);
+      color:#fff;
+    }
     .hero{
       background:linear-gradient(135deg, var(--primary), #244b77 55%, var(--primary-2));
       color:#fff;
       padding:64px 20px 42px;
     }
-
     .hero-inner{
       max-width:1100px;
       margin:0 auto;
     }
-
     .eyebrow{
       display:inline-block;
       background:rgba(255,255,255,.12);
@@ -54,53 +87,44 @@
       font-size:.9rem;
       margin-bottom:16px;
     }
-
     .hero h1{
       margin:0 0 14px;
       font-size:2.3rem;
       line-height:1.15;
     }
-
     .hero p{
       margin:0;
       max-width:780px;
       color:rgba(255,255,255,.92);
       font-size:1.05rem;
     }
-
     .wrap{
       max-width:1100px;
       margin:-24px auto 48px;
       padding:0 20px;
     }
-
     .grid{
       display:grid;
       grid-template-columns:300px 1fr;
       gap:24px;
       align-items:start;
     }
-
-    .toc,
-    .content{
+    .toc,.content{
       background:var(--card);
       border:1px solid var(--border);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
     }
-
     .toc{
       position:sticky;
-      top:20px;
+      top:76px;
       padding:22px 18px;
     }
-
     .toc h2{
       margin:0 0 14px;
       font-size:1.05rem;
       color:var(--primary);
     }
-
     .toc a{
       display:block;
       text-decoration:none;
@@ -111,16 +135,11 @@
       transition:.2s ease;
       font-size:.96rem;
     }
-
     .toc a:hover{
       background:var(--accent);
       color:var(--primary);
     }
-
-    .content{
-      padding:34px 30px;
-    }
-
+    .content{padding:34px 30px}
     .highlight{
       background:#f8fbff;
       border:1px solid #d7e7fb;
@@ -129,51 +148,40 @@
       padding:18px 18px 16px;
       margin-bottom:28px;
     }
-
     .highlight h2{
       margin:0 0 8px;
       color:var(--primary);
       font-size:1.1rem;
     }
-
     section{
       margin-bottom:34px;
       scroll-margin-top:100px;
     }
-
     h2{
       color:var(--primary);
       font-size:1.28rem;
       margin:0 0 12px;
     }
-
     h3{
       color:var(--primary-2);
       font-size:1.02rem;
       margin:18px 0 10px;
     }
-
     p{
       margin:0 0 14px;
       text-align:justify;
     }
-
     ul{
       margin:0 0 14px 20px;
       padding:0;
     }
-
-    li{
-      margin:0 0 10px;
-    }
-
+    li{margin:0 0 10px}
     .meta{
       display:flex;
       flex-wrap:wrap;
       gap:12px;
       margin-top:18px;
     }
-
     .pill{
       background:#eef4fb;
       color:var(--primary);
@@ -182,19 +190,16 @@
       border-radius:999px;
       font-size:.92rem;
     }
-
     .contact-box{
       background:linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
       border:1px solid #d9e7f7;
       border-radius:16px;
       padding:18px;
     }
-
     a{
       color:var(--primary-2);
       word-break:break-word;
     }
-
     footer{
       text-align:center;
       color:var(--muted);
@@ -203,46 +208,33 @@
       padding-top:22px;
       border-top:1px solid var(--border);
     }
-
     @media (max-width: 900px){
-      .grid{
-        grid-template-columns:1fr;
-      }
-
-      .toc{
-        position:relative;
-        top:0;
-      }
-
-      .hero h1{
-        font-size:1.9rem;
-      }
-
-      .content{
-        padding:26px 20px;
-      }
+      .grid{grid-template-columns:1fr}
+      .toc{position:relative; top:0}
+      .hero h1{font-size:1.9rem}
+      .content{padding:26px 20px}
     }
-
     @media (max-width: 540px){
-      .hero{
-        padding:50px 16px 34px;
-      }
-
-      .wrap{
-        padding:0 16px;
-      }
-
-      .hero h1{
-        font-size:1.65rem;
-      }
-
-      .hero p{
-        font-size:1rem;
-      }
+      .hero{padding:50px 16px 34px}
+      .wrap{padding:0 16px}
+      .topbar-inner{padding:12px 16px}
+      .hero h1{font-size:1.65rem}
+      .hero p{font-size:1rem}
     }
   </style>
 </head>
 <body>
+
+  <div class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/apps/Biblia/politicas/">Biblia Universal con audio</a>
+      <nav class="topnav" aria-label="Navegación legal">
+        <a class="active" href="/apps/Biblia/politicas/">Política de Privacidad</a>
+        <a href="/apps/Biblia/legal/">Aviso Legal</a>
+        <a href="/apps/Biblia/terminos/">Términos de Servicio</a>
+      </nav>
+    </div>
+  </div>
 
   <header class="hero">
     <div class="hero-inner">

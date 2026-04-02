@@ -441,21 +441,35 @@
 }
 
 /* ════════════════════════════════════
-   CAPTURAS — scroll horizontal estilo app store
+   CAPTURAS — scroll horizontal solo en esta sección
 ════════════════════════════════════ */
+
+/* El h2 de capturas + su contenedor necesitan overflow contenido */
+#detailContent {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.screenshots-wrapper {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
 .screenshots-row {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   gap: 12px;
   overflow-x: auto;
-  overflow-y: visible;
-  padding: 8px 4px 16px;
-  margin-bottom: 8px;
+  overflow-y: hidden;
+  padding: 8px 4px 14px;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
   scrollbar-color: var(--accent) var(--border);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .screenshots-row::-webkit-scrollbar { height: 5px; }
@@ -466,7 +480,6 @@
   flex-shrink: 0;
   width: 210px;
   height: auto;
-  max-height: none;
   border-radius: 16px;
   object-fit: contain;
   background: #f8f9fc;

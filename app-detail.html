@@ -3,40 +3,54 @@
 <head>
   <meta charset="utf-8" />
   <title>Appser Store — Detalles de la App</title>
-  <!-- Responsive -->
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  
-  <!-- ETIQUETA CANÓNICA DINÁMICA - ESTO ES LO MÁS IMPORTANTE -->
+
+  <!-- Canonical dinámico -->
   <link id="canonicalTag" rel="canonical" href="">
-  
+
   <!-- SEO dinámico -->
   <meta name="description" content="Descarga esta aplicación desde Appser Store">
   <meta name="robots" content="index, follow">
-  
-  <!-- Estilos ESPECÍFICOS para página de detalles -->
+
+  <!-- Fonts (mismas que index) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Firebase preconnect -->
+  <link rel="preconnect" href="https://firebasestorage.googleapis.com">
+
+  <!-- Favicons -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <!-- Estilos compartidos + detalle -->
+  <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="detalle.css">
 </head>
+<body>
 
-<body>  
-  <!-- HEADER (IDÉNTICO al index.html) -->
+  <!-- ══ HEADER (idéntico al index) ══ -->
   <header class="store-header">
-    <img src="logo.webp" alt="Appser" class="brand-logo" onclick="window.location.href='https://appsem.rap-infinite.online/'">
-    <div class="brand">
-      <div>
+    <div class="brand" style="cursor:pointer;" onclick="window.location.href='https://appsem.rap-infinite.online/'">
+      <img src="logo.webp" alt="Appser Store" class="brand-logo">
+      <div class="brand-text">
         <h1>Appser Store</h1>
         <p class="brand-tagline">Apps para todos</p>
       </div>
     </div>
-
     <div class="header-right">
       <div class="search-box">
-        <span class="icon">🔍</span>
-        <input id="searchInput" type="text" placeholder="Buscar apps, juegos, herramientas..." />
+        <span class="search-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </span>
+        <input id="searchInput" type="text" placeholder="Buscar apps, juegos, herramientas..." autocomplete="off" />
       </div>
     </div>
   </header>
 
-  <!-- CATEGORÍAS (IDÉNTICAS al index.html) -->
+  <!-- ══ CATEGORÍAS (idénticas al index) ══ -->
   <section class="categories-bar">
     <button class="chip active" data-cat="all">Todas</button>
     <button class="chip" data-cat="Educación">Educación</button>
@@ -50,31 +64,33 @@
     <button class="chip" data-cat="Herramientas">Herramientas</button>
   </section>
 
-  <!-- CONTENIDO PRINCIPAL -->
-  <main class="store-main">
-    <!-- SECCIÓN DE APPS (OCULTA - se mantiene por compatibilidad) -->
-    <section class="apps-section">
-      <div id="appsGrid" class="apps-grid"></div>
-      <p id="emptyState" class="empty-state" style="display:none;">
-        No se encontraron apps para esta búsqueda o categoría.
-      </p>
+  <!-- ══ CONTENIDO PRINCIPAL ══ -->
+  <main class="store-main detail-main">
+
+    <!-- Grid oculto (compatibilidad con JS) -->
+    <div id="appsGrid" style="display:none;"></div>
+    <p id="emptyState" style="display:none;"></p>
+
+    <!-- Detalle de la app -->
+    <section class="app-detail-page">
+      <div id="detailContent" class="detail-loading">
+        <div class="loading-spinner"></div>
+        <p>Cargando información de la aplicación…</p>
+      </div>
     </section>
-    
-    <!-- OVERLAY (VISIBLE COMO CONTENIDO PRINCIPAL) -->
-     <!-- CONTENIDO DE DETALLE (YA NO OVERLAY) -->
-  <section class="app-detail-page">
-    <div id="detailContent" style="padding: 50px; color: #64748b;">
-      <p>Cargando información de la aplicación...</p>
-    </div>
-  </section>
-    
+
   </main>
-  
+
+  <!-- ══ FOOTER ══ -->
   <footer class="store-footer">
-    <div>
-      © <span id="year"></span> Appser Store — Apps para todos ·
-      <a href="/privacidad.html" style="color: #9ca3af;">Privacidad</a> ·
-      <a href="/terminos.html" style="color: #9ca3af;">Términos</a>
+    <div class="footer-inner">
+      <p class="footer-brand">Appser Store</p>
+      <p class="footer-copy">© <span id="year"></span> AppsMart Technology · Apps para todos</p>
+      <div class="footer-links">
+        <a href="/privacidad.html">Privacidad</a>
+        <span>·</span>
+        <a href="/terminos.html">Términos</a>
+      </div>
     </div>
   </footer>
 
@@ -83,11 +99,7 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-
-  <!-- Configuración Firebase -->
   <script src="firebase.js"></script>
-
-  <!-- Lógica para la página de detalles -->
   <script src="app-detail-logic.js"></script>
 </body>
 </html>

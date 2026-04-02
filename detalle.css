@@ -446,29 +446,30 @@
 .screenshots-row {
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
   gap: 12px;
   overflow-x: auto;
-  padding-bottom: 12px;
+  overflow-y: visible;
+  padding: 8px 4px 16px;
   margin-bottom: 8px;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
-  scrollbar-color: var(--border) transparent;
+  scrollbar-color: var(--accent) var(--border);
 }
 
-.screenshots-row::-webkit-scrollbar { height: 6px; }
-.screenshots-row::-webkit-scrollbar-track { background: transparent; }
-.screenshots-row::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 10px;
-}
+.screenshots-row::-webkit-scrollbar { height: 5px; }
+.screenshots-row::-webkit-scrollbar-track { background: var(--border); border-radius: 10px; }
+.screenshots-row::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
 
 .screenshots-row img {
   flex-shrink: 0;
-  width: 200px;
-  height: 360px;
+  width: 210px;
+  height: auto;
+  max-height: none;
   border-radius: 16px;
-  object-fit: cover;
+  object-fit: contain;
+  background: #f8f9fc;
   border: 1.5px solid var(--border);
   box-shadow: var(--shadow-md);
   transition: transform 0.2s, box-shadow 0.2s;
@@ -478,20 +479,21 @@
 }
 
 .screenshots-row img:hover {
-  transform: scale(1.03) translateY(-3px);
+  transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
 }
 
 /* ════════════════════════════════════
-   REVIEW FORM
+   REVIEW FORM — ancho completo
 ════════════════════════════════════ */
 .review-form {
   background: var(--card);
   border: 1.5px solid var(--border);
   border-radius: var(--radius-md);
-  padding: 24px;
+  padding: 28px 28px 24px;
   margin-bottom: 20px;
   box-shadow: var(--shadow-sm);
+  width: 100%;
 }
 
 .review-form h3 {
@@ -663,7 +665,7 @@
   .detail-main { padding: 28px 20px 64px !important; }
   .overlay-icon { width: 82px; height: 82px; }
   .overlay-header h1 { font-size: 1.35rem; }
-  .screenshots-row img { width: 170px; height: 310px; }
+  .screenshots-row img { width: 180px; }
 }
 
 /* ════════════════════════════════════
@@ -716,7 +718,7 @@
   .rating-big { font-size: 2.6rem; }
   .stars-bars { width: 100%; }
 
-  .screenshots-row img { width: 150px; height: 270px; }
+  .screenshots-row img { width: 155px; }
 
   .reviews-list { flex-direction: column; }
 

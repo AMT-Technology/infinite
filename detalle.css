@@ -119,25 +119,27 @@
   width: 100%;
 }
 
-/* Botón principal */
+/* Botón principal — tamaño natural, no flex expansivo */
 .install-btn {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 10px !important;
-  flex: 1 1 180px !important;
+  gap: 8px !important;
+  flex: 0 0 auto !important;
+  width: auto !important;
   height: auto !important;
-  padding: 16px 28px !important;
+  padding: 14px 28px !important;
   background: var(--accent) !important;
   border: none !important;
   border-radius: var(--radius-sm) !important;
   font-family: var(--font-body) !important;
-  font-size: 1rem !important;
+  font-size: 0.95rem !important;
   font-weight: 700 !important;
   color: #fff !important;
   cursor: pointer !important;
   box-shadow: 0 4px 18px rgba(255,92,53,0.32) !important;
   transition: transform 0.18s ease, box-shadow 0.18s ease !important;
+  white-space: nowrap !important;
 }
 
 .install-btn::before {
@@ -157,7 +159,7 @@
   cursor: not-allowed !important;
 }
 
-/* Botones secundarios */
+/* Botones secundarios — íconos más grandes y visibles */
 .playstore-btn,
 .uptodown-btn,
 .mega-btn,
@@ -168,8 +170,8 @@
   align-items: center !important;
   justify-content: center !important;
   gap: 6px !important;
-  min-width: 88px !important;
-  padding: 12px 16px !important;
+  min-width: 90px !important;
+  padding: 10px 14px !important;
   background: var(--card) !important;
   border: 1.5px solid var(--border) !important;
   border-radius: var(--radius-sm) !important;
@@ -177,7 +179,7 @@
   transition: all 0.18s ease !important;
   box-shadow: var(--shadow-sm) !important;
   font-family: var(--font-body) !important;
-  font-size: 0.74rem !important;
+  font-size: 0.75rem !important;
   font-weight: 700 !important;
   color: var(--muted) !important;
 }
@@ -188,14 +190,16 @@
 .mediafire-btn::after  { content: 'Mediafire'; }
 .share-btn::after      { content: 'Compartir'; }
 
+/* Íconos grandes y claros */
 .playstore-btn img,
 .uptodown-btn img,
 .mega-btn img,
 .mediafire-btn img,
 .share-btn img {
-  width: 38px !important;
-  height: 38px !important;
+  width: 52px !important;
+  height: 52px !important;
   object-fit: contain !important;
+  display: block !important;
 }
 
 .playstore-btn:hover,
@@ -697,7 +701,7 @@
     gap: 10px;
   }
 
-  .install-btn { flex: 1 1 100% !important; }
+  .install-btn { width: 100% !important; }
 
   .playstore-btn,
   .uptodown-btn,
@@ -710,6 +714,15 @@
     justify-content: flex-start !important;
     gap: 14px !important;
     padding: 12px 18px !important;
+  }
+
+  .playstore-btn img,
+  .uptodown-btn img,
+  .mega-btn img,
+  .mediafire-btn img,
+  .share-btn img {
+    width: 40px !important;
+    height: 40px !important;
   }
 
   .info-grid { grid-template-columns: 1fr 1fr; gap: 8px; }

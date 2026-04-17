@@ -145,6 +145,61 @@
 }
 
 /* ════════════════════════════════════
+   MÉTRICAS SUPERIORES
+════════════════════════════════════ */
+.detail-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+
+.detail-stats-top {
+  margin-bottom: 16px;
+}
+
+.stat-card {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 18px;
+  padding: 16px 16px 14px;
+  box-shadow: var(--shadow-sm);
+  min-height: 92px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.compact-stat-card {
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 0.76rem;
+  color: var(--muted);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  line-height: 1.05;
+  color: var(--primary);
+  font-weight: 800;
+  word-break: break-word;
+}
+
+.stat-note {
+  display: none;
+}
+
+/* ════════════════════════════════════
    ACCIONES
 ════════════════════════════════════ */
 .install-share-row {
@@ -245,51 +300,6 @@
   color: var(--accent) !important;
   transform: translateY(-2px) !important;
   box-shadow: 0 6px 18px rgba(255, 92, 53, 0.14) !important;
-}
-
-/* ════════════════════════════════════
-   MÉTRICAS DESTACADAS
-════════════════════════════════════ */
-.detail-stats {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
-  margin-bottom: 24px;
-  padding: 0;
-  background: transparent;
-  border: none;
-}
-
-.stat-card {
-  background: var(--card);
-  border: 1.5px solid var(--border);
-  border-radius: 20px;
-  padding: 18px 18px 16px;
-  box-shadow: var(--shadow-sm);
-}
-
-.stat-label {
-  font-size: 0.76rem;
-  color: var(--muted);
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 8px;
-}
-
-.stat-value {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  line-height: 1.05;
-  color: var(--primary);
-  font-weight: 800;
-}
-
-.stat-note {
-  margin-top: 6px;
-  font-size: 0.82rem;
-  color: var(--text-soft);
-  font-weight: 600;
 }
 
 /* ════════════════════════════════════
@@ -771,7 +781,7 @@
   .overlay-header { grid-template-columns: 92px 1fr; gap: 18px; padding: 22px; }
   .overlay-icon { width: 92px; height: 92px; }
   .overlay-header h1 { font-size: 1.6rem; }
-  .detail-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .detail-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .install-share-row { grid-template-columns: 1fr repeat(2, minmax(110px, 1fr)); }
   .screenshots-row img { width: 190px; }
   .rating-summary-card { grid-template-columns: 180px 1fr; gap: 20px; }
@@ -835,7 +845,8 @@
   }
 
   .detail-stats {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
 
   .info-grid {
@@ -915,4 +926,4 @@
   .review-form {
     padding: 22px 18px 20px;
   }
-     }
+   }

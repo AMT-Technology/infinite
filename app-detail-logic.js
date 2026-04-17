@@ -23,10 +23,8 @@ function escapeHtml(value) {
 
 function formatDate(value) {
   if (!value) return "—";
-
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return "—";
-
   return date.toLocaleDateString("es-ES");
 }
 
@@ -59,6 +57,10 @@ function renderStarsStatic(rating) {
   for (let i = 0; i < empty; i++) stars += '<span class="star-static">☆</span>';
 
   return stars;
+}
+
+function renderRowStars(star) {
+  return `${"★".repeat(star)}${"☆".repeat(5 - star)}`;
 }
 
 // ====== Cargar datos de la app ======
@@ -145,9 +147,7 @@ function actualizarOpenGraphTags(app) {
 
 function agregarStructuredData(app) {
   const oldScript = document.querySelector('script[type="application/ld+json"]');
-  if (oldScript) {
-    oldScript.remove();
-  }
+  if (oldScript) oldScript.remove();
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -180,9 +180,7 @@ function agregarStructuredData(app) {
   };
 
   Object.keys(structuredData).forEach((key) => {
-    if (structuredData[key] === undefined) {
-      delete structuredData[key];
-    }
+    if (structuredData[key] === undefined) delete structuredData[key];
   });
 
   const script = document.createElement("script");
@@ -224,7 +222,6 @@ function renderAppDetails(app) {
   const appUpdate = escapeHtml(formatDate(app.fechaActualizacion));
   const adsLabel = escapeHtml(getAdsLabel(app.anuncios));
   const internetLabel = escapeHtml(getInternetLabel(app.internet));
-
   const screenshots = Array.isArray(app.imgSecundarias) ? app.imgSecundarias : [];
 
   const statsCards = `
@@ -241,7 +238,7 @@ function renderAppDetails(app) {
     <div class="stat-card">
       <div class="stat-label">Valoración</div>
       <div class="stat-value">${ratingAvg.toFixed(1)}</div>
-      <div class="stat-note">${formatNumber(ratingCount)} votos</div>
+      <div class="stat-note">${formatNumber(total)} valoraciones</div>
     </div>
     <div class="stat-card">
       <div class="stat-label">Versión</div>
@@ -326,30 +323,24 @@ function renderAppDetails(app) {
       ${statsCards}
     </div>
 
-    <div class="rating-block">
-      <p id="ratingLabel" class="rating-label">
-        Valoración: ${ratingAvg.toFixed(1)} (${formatNumber(ratingCount)} votos)
-      </p>
-      <div id="starsRow" class="stars-row">
-        ${renderStarsStatic(ratingAvg)}
-      </div>
-      <button id="likeBtn" class="like-btn" ${myVote.liked ? "disabled" : ""}>
-        ${myVote.liked ? "❤️ Ya te gusta" : "❤️ Me gusta"} (${formatNumber(likes)})
-      </button>
-    </div>
-
-    <h2>Valoraciones y reseñas</h2>
-    <div class="stars-graph">
-      <div class="stars-left">
+    <h2>Valoraciones</h2>
+    <div class="rating-summary-card">
+      <div class="rating-summary-left">
         <div id="ratingBig" class="rating-big">${ratingAvg.toFixed(1)}</div>
-        <div id="ratingTotal" class="rating-total">${formatNumber(total)} reseñas</div>
+        <div id="starsRow" class="stars-row rating-main-stars">
+          ${renderStarsStatic(ratingAvg)}
+        </div>
+        <div class="rating-total">${formatNumber(total)} valoraciones</div>
       </div>
 
-      <div class="stars-bars">
+      <div class="rating-summary-right">
         ${[5, 4, 3, 2, 1]
           .map((star) => `
-            <div class="bar-row">
-              <span>${star}</span>
+            <div class="rating-row">
+              <div class="rating-row-label">
+                <span class="rating-row-number">${star}</span>
+                <span class="rating-row-stars">${renderRowStars(star)}</span>
+              </div>
               <div class="bar">
                 <div
                   id="bar${star}"
@@ -361,6 +352,12 @@ function renderAppDetails(app) {
           `)
           .join("")}
       </div>
+    </div>
+
+    <div class="rating-actions">
+      <button id="likeBtn" class="like-btn" ${myVote.liked ? "disabled" : ""}>
+        ${myVote.liked ? "❤️ Ya te gusta" : "❤️ Me gusta"} (${formatNumber(likes)})
+      </button>
     </div>
 
     <h2>Información de la app</h2>
@@ -570,7 +567,7 @@ function inicializarEventos(app) {
         console.error("Error dando like:", error);
       });
     };
-  };
+  }
 }
 
 // ====== Reseñas ======
@@ -694,10 +691,7 @@ function handleSendReview() {
       currentApp.ratingCount = newCount;
       currentApp.starsBreakdown = breakdown;
 
-      renderReviewStars();
-      loadReviews(app.id);
       renderAppDetails(currentApp);
-
       alert("¡Tu reseña fue publicada!");
     })
     .catch((error) => {
@@ -709,9 +703,7 @@ function handleSendReview() {
 // ====== Inicializar ======
 document.addEventListener("DOMContentLoaded", () => {
   const year = document.getElementById("year");
-  if (year) {
-    year.textContent = new Date().getFullYear();
-  }
+  if (year) year.textContent = new Date().getFullYear();
 
   cargarApp();
 

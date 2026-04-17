@@ -225,25 +225,17 @@ function renderAppDetails(app) {
   const screenshots = Array.isArray(app.imgSecundarias) ? app.imgSecundarias : [];
 
   const statsCards = `
-    <div class="stat-card">
+    <div class="stat-card compact-stat-card">
       <div class="stat-label">Descargas</div>
       <div class="stat-value">${formatNumber(descargas)}</div>
-      <div class="stat-note">Instalaciones registradas</div>
     </div>
-    <div class="stat-card">
-      <div class="stat-label">Likes</div>
+    <div class="stat-card compact-stat-card">
+      <div class="stat-label">Me gusta</div>
       <div class="stat-value">${formatNumber(likes)}</div>
-      <div class="stat-note">Personas a las que les gusta</div>
     </div>
-    <div class="stat-card">
-      <div class="stat-label">Valoración</div>
-      <div class="stat-value">${ratingAvg.toFixed(1)}</div>
-      <div class="stat-note">${formatNumber(total)} valoraciones</div>
-    </div>
-    <div class="stat-card">
+    <div class="stat-card compact-stat-card">
       <div class="stat-label">Versión</div>
       <div class="stat-value">${appVersion}</div>
-      <div class="stat-note">Última versión visible</div>
     </div>
   `;
 
@@ -289,6 +281,10 @@ function renderAppDetails(app) {
       </div>
     </div>
 
+    <div id="detailStats" class="detail-stats detail-stats-top">
+      ${statsCards}
+    </div>
+
     <div class="install-share-row">
       <button id="installBtn" class="install-btn" aria-label="Descargar APK principal">
         <img src="assets/icons/descargar.png" alt="Descarga Directa">
@@ -317,10 +313,6 @@ function renderAppDetails(app) {
       <button id="shareBtn" class="share-btn" aria-label="Compartir aplicación">
         <img src="assets/icons/compartir.png" alt="Compartir">
       </button>
-    </div>
-
-    <div id="detailStats" class="detail-stats">
-      ${statsCards}
     </div>
 
     <h2>Valoraciones</h2>

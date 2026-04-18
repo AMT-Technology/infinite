@@ -7,10 +7,11 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9801513320218515" crossorigin="anonymous"></script>
 
   <!-- SEO -->
-  <meta name="description" content="Appser Store: Descarga aplicaciones Android seguras, rápidas y siempre actualizadas desde nuestra tienda oficial.">
-  <meta name="keywords" content="Appser Store, descargar apps Android, APK seguro, tienda de aplicaciones Android, juegos Android">
-  <meta name="robots" content="index, follow">
+  <meta name="description" content="Appser Store: descarga aplicaciones Android seguras, rápidas y actualizadas desde la tienda oficial de AppsMart Technology.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="google-site-verification" content="ssz96cDfN5wN4rGDGJESku74Yq7jcYv8fAwTbw0ttz0" />
+  <meta name="author" content="AppsMart Technology">
 
   <!-- Canonical -->
   <link rel="canonical" href="https://appsem.rap-infinite.online/">
@@ -22,31 +23,43 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Appser Store — Apps para todos">
-  <meta property="og:description" content="Descubre Appser Store, Apps para todos. Descargas seguras, rápidas y actualizadas para Android.">
+  <meta property="og:title" content="Appser Store | Tienda oficial de AppsMart Technology">
+  <meta property="og:description" content="Descarga aplicaciones Android seguras, rápidas y actualizadas desde Appser Store.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://appsem.rap-infinite.online/">
   <meta property="og:image" content="https://appsem.rap-infinite.online/logo.webp">
+  <meta property="og:site_name" content="Appser Store">
+  <meta property="og:locale" content="es_PE">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Appser Store — Apps para todos">
-  <meta name="twitter:description" content="Appser Store: descargas seguras, rápidas y actualizadas para Android.">
+  <meta name="twitter:title" content="Appser Store | Tienda oficial de AppsMart Technology">
+  <meta name="twitter:description" content="Descarga aplicaciones Android seguras, rápidas y actualizadas desde Appser Store.">
   <meta name="twitter:image" content="https://appsem.rap-infinite.online/logo.webp">
-
-  <!-- Author -->
-  <meta name="author" content="Appser Store">
 
   <!-- Schema JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Appser Store",
-    "url": "https://appsem.rap-infinite.online/",
-    "logo": "https://appsem.rap-infinite.online/logo.webp",
-    "slogan": "Apps para todos",
-    "description": "Appser Store. Tienda oficial para descargar aplicaciones Android seguras y actualizadas."
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "Appser Store",
+        "url": "https://appsem.rap-infinite.online/",
+        "logo": "https://appsem.rap-infinite.online/logo.webp",
+        "description": "Tienda oficial para descargar aplicaciones Android seguras y actualizadas."
+      },
+      {
+        "@type": "WebSite",
+        "name": "Appser Store",
+        "url": "https://appsem.rap-infinite.online/",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://appsem.rap-infinite.online/?search={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    ]
   }
   </script>
 
@@ -61,7 +74,6 @@
 
 <body>
 
-  <!-- ══ HEADER ══ -->
   <header class="store-header">
     <div class="brand">
       <img src="logo.webp" alt="Appser Store" class="brand-logo">
@@ -80,7 +92,6 @@
     </div>
   </header>
 
-  <!-- ══ HERO ══ -->
   <section class="store-hero">
     <div class="hero-blob hero-blob-1"></div>
     <div class="hero-blob hero-blob-2"></div>
@@ -96,7 +107,6 @@
     </div>
   </section>
 
-  <!-- ══ CATEGORÍAS ══ -->
   <section class="categories-bar">
     <button class="chip active" data-cat="all">Todas</button>
     <button class="chip" data-cat="Educación">Educación</button>
@@ -110,7 +120,6 @@
     <button class="chip" data-cat="Herramientas">Herramientas</button>
   </section>
 
-  <!-- ══ CONTENIDO PRINCIPAL ══ -->
   <main class="store-main">
     <section class="apps-section">
       <div class="section-header">
@@ -124,7 +133,6 @@
     </section>
   </main>
 
-  <!-- ══ FOOTER ══ -->
   <footer class="store-footer">
     <div class="footer-inner">
       <p class="footer-brand">Appser Store</p>
@@ -139,16 +147,11 @@
     </div>
   </footer>
 
-  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-
-  <!-- Configuración Firebase -->
   <script src="firebase.js"></script>
-
-  <!-- Lógica -->
   <script src="index.js"></script>
 </body>
 </html>

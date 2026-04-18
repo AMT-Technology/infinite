@@ -115,7 +115,7 @@ async function cargarApp() {
 
 function mostrarError(mensaje) {
   detailContent.innerHTML = `
-    <div style="text-align: center; padding: 50px;">
+    <div style="text-align:center; padding:50px;">
       <h2>${escapeHtml(mensaje)}</h2>
       <button class="btn-back" onclick="window.location.href='https://appsem.rap-infinite.online/'">
         Volver al inicio
@@ -133,9 +133,7 @@ function actualizarMetaTags(app) {
   }
 
   const canonicalTag = document.getElementById("canonicalTag");
-  if (canonicalTag) {
-    canonicalTag.href = window.location.href;
-  }
+  if (canonicalTag) canonicalTag.href = window.location.href;
 
   actualizarOpenGraphTags(app);
   actualizarTwitterTags(app);
@@ -262,17 +260,30 @@ function renderAppDetails(app) {
   const internetLabel = escapeHtml(getInternetLabel(app.internet));
   const screenshots = Array.isArray(app.imgSecundarias) ? app.imgSecundarias : [];
 
+  const statsCards = `
+    <div class="stat-card compact-stat-card">
+      <div class="stat-label">Descargas</div>
+      <div class="stat-value">${formatNumber(descargas)}</div>
+    </div>
+    <div class="stat-card compact-stat-card">
+      <div class="stat-label">Me gusta</div>
+      <div class="stat-value">${formatNumber(likes)}</div>
+    </div>
+    <div class="stat-card compact-stat-card">
+      <div class="stat-label">Versión</div>
+      <div class="stat-value">${appVersion}</div>
+    </div>
+  `;
+
   const screenshotsHtml = screenshots.length
     ? `
       <h2>Capturas de pantalla</h2>
       <div class="screenshots-wrapper">
         <div id="detailScreens" class="screenshots-row">
-          ${screenshots
-            .map((img, index) => {
-              const safeImg = escapeHtml(img);
-              return `<img src="${safeImg}" alt="Captura ${index + 1} de ${appName}" loading="lazy">`;
-            })
-            .join("")}
+          ${screenshots.map((img, index) => {
+            const safeImg = escapeHtml(img);
+            return `<img src="${safeImg}" alt="Captura ${index + 1} de ${appName}" loading="lazy">`;
+          }).join("")}
         </div>
       </div>
     `
@@ -304,9 +315,37 @@ function renderAppDetails(app) {
       </div>
     </div>
 
-    <div class="rating-actions">
-      <button id="likeBtn" class="like-btn" ${myVote.liked ? "disabled" : ""}>
-        ${myVote.liked ? "❤️ Ya te gusta" : "❤️ Me gusta"} (${formatNumber(likes)})
+    <div id="detailStats" class="detail-stats detail-stats-top">
+      ${statsCards}
+    </div>
+
+    <div class="install-share-row">
+      <button id="installBtn" class="install-btn" aria-label="Descargar APK principal">
+        <img src="assets/icons/descargar.png" alt="Descarga Directa">
+      </button>
+
+      ${app.playstoreUrl ? `
+        <button id="playstoreBtn" class="playstore-btn" aria-label="Abrir en Play Store">
+          <img src="assets/icons/playstore.png" alt="Play Store">
+        </button>` : ""}
+
+      ${app.uptodownUrl ? `
+        <button id="uptodownBtn" class="uptodown-btn" aria-label="Abrir en Uptodown">
+          <img src="assets/icons/uptodown.png" alt="Uptodown">
+        </button>` : ""}
+
+      ${app.megaUrl ? `
+        <button id="megaBtn" class="mega-btn" aria-label="Abrir en Mega">
+          <img src="assets/icons/mega.png" alt="Mega">
+        </button>` : ""}
+
+      ${app.mediafireUrl ? `
+        <button id="mediafireBtn" class="mediafire-btn" aria-label="Abrir en Mediafire">
+          <img src="assets/icons/mediafire.png" alt="Mediafire">
+        </button>` : ""}
+
+      <button id="shareBtn" class="share-btn" aria-label="Compartir aplicación">
+        <img src="assets/icons/compartir.png" alt="Compartir">
       </button>
     </div>
 
@@ -321,20 +360,24 @@ function renderAppDetails(app) {
       </div>
 
       <div class="rating-summary-right">
-        ${[5, 4, 3, 2, 1]
-          .map((star) => `
-            <div class="rating-row">
-              <div class="rating-row-label">
-                <span class="rating-row-number">${star}</span>
-                <span class="rating-row-stars">${renderRowStars(star)}</span>
-              </div>
-              <div class="bar">
-                <div class="bar-fill" style="width: ${total ? (breakdown[star] / total) * 100 : 0}%"></div>
-              </div>
+        ${[5, 4, 3, 2, 1].map((star) => `
+          <div class="rating-row">
+            <div class="rating-row-label">
+              <span class="rating-row-number">${star}</span>
+              <span class="rating-row-stars">${renderRowStars(star)}</span>
             </div>
-          `)
-          .join("")}
+            <div class="bar">
+              <div class="bar-fill" style="width: ${total ? (breakdown[star] / total) * 100 : 0}%"></div>
+            </div>
+          </div>
+        `).join("")}
       </div>
+    </div>
+
+    <div class="rating-actions">
+      <button id="likeBtn" class="like-btn" ${myVote.liked ? "disabled" : ""}>
+        ${myVote.liked ? "❤️ Ya te gusta" : "❤️ Me gusta"} (${formatNumber(likes)})
+      </button>
     </div>
 
     <h2>Información de la app</h2>
@@ -371,13 +414,75 @@ function renderAppDetails(app) {
   `;
 
   detailContent.innerHTML = html;
-
   inicializarEventos(app);
   renderReviewStars();
   loadReviews(app.id);
 }
 
 function inicializarEventos(app) {
+  const installBtn = document.getElementById("installBtn");
+  if (installBtn) {
+    installBtn.onclick = () => {
+      if (!app.apk) {
+        alert("🚫 No hay archivo disponible.");
+        return;
+      }
+
+      installBtn.disabled = true;
+
+      db.collection("apps").doc(app.id).update({
+        descargasReales: firebase.firestore.FieldValue.increment(1)
+      }).then(() => {
+        window.open(app.apk, "_blank");
+        setTimeout(() => {
+          installBtn.disabled = false;
+        }, 1000);
+      }).catch((error) => {
+        console.error("Error al incrementar descargas:", error);
+        installBtn.disabled = false;
+        window.open(app.apk, "_blank");
+      });
+    };
+  }
+
+  const botones = [
+    { id: "playstoreBtn", url: app.playstoreUrl },
+    { id: "uptodownBtn", url: app.uptodownUrl },
+    { id: "megaBtn", url: app.megaUrl },
+    { id: "mediafireBtn", url: app.mediafireUrl }
+  ];
+
+  botones.forEach(({ id, url }) => {
+    const btn = document.getElementById(id);
+    if (btn && url) {
+      btn.onclick = () => window.open(url, "_blank");
+    } else if (btn) {
+      btn.style.display = "none";
+    }
+  });
+
+  const shareBtn = document.getElementById("shareBtn");
+  if (shareBtn) {
+    shareBtn.onclick = async () => {
+      const url = window.location.href;
+      const title = app.nombre;
+      const text = app.descripcion?.substring(0, 100) || "";
+
+      try {
+        if (navigator.share) {
+          await navigator.share({ title, text, url });
+        } else if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(url);
+          alert("¡Enlace copiado al portapapeles!");
+        } else {
+          alert(url);
+        }
+      } catch (error) {
+        console.error("Error compartiendo:", error);
+      }
+    };
+  }
+
   const likeBtn = document.getElementById("likeBtn");
   if (likeBtn) {
     likeBtn.onclick = () => {

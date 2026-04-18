@@ -1,36 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  
-  <!-- Página principal -->
   <url>
     <loc>https://appsem.rap-infinite.online/</loc>
-    <lastmod>2026-01-05</lastmod>
-    <priority>1.0</priority>
-    <changefreq>daily</changefreq>
+    <lastmod>2026-04-17</lastmod>
   </url>
-
-  <!-- Primera app (reemplaza CON-EL-SLUG-REAL con el slug de tu primera app) -->
   <url>
     <loc>https://appsem.rap-infinite.online/app-detail.html?app=biblia-universal-con-audio</loc>
-    <lastmod>2026-01-05</lastmod>
-    <priority>0.8</priority>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-04-17</lastmod>
   </url>
-
-  <!-- Segunda app (reemplaza CON-EL-SLUG-REAL con el slug de tu segunda app) -->
   <url>
     <loc>https://appsem.rap-infinite.online/app-detail.html?app=verdad-o-reto</loc>
-    <lastmod>2026-01-05</lastmod>
-    <priority>0.8</priority>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-04-17</lastmod>
   </url>
-
-   <!-- Tercera app (reemplaza CON-EL-SLUG-REAL con el slug de tu segunda app) -->
   <url>
     <loc>https://appsem.rap-infinite.online/app-detail.html?app=authpro</loc>
-    <lastmod>2026-01-05</lastmod>
-    <priority>0.8</priority>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-04-17</lastmod>
   </url>
-
 </urlset>

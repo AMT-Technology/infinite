@@ -3,6 +3,8 @@ google.com, pub-9801513320218515, DIRECT, f08c47fec0942fa0
 google.com, pub-1896111692455045, DIRECT, f08c47fec0942fa0
 
 
+google.com, pub-9268871554802722, DIRECT, f08c47fec0942fa0
+
 adagio.io, 1522, RESELLER
 adagio.io, 1575, RESELLER
 blueseasx.com, 203625, RESELLER
